@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Com/munication - Formation Hybride</title>
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --primary: #0f172a; /* Bleu Nuit - Côté Pro/Sérieux */
+            --accent: #106db9; /* Vert Menthe - Côté Tech/IA/Action */
+            --accent-hover: #054996;
+            --bg-light: #f8fafc;
+            --text-dark: #334155;
+            --text-light: #94a3b8;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* --- CONCEPT SECTION (DUO) --- */
+        .concept {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 5%;
+        }
+
+        .concept-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .concept-col h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* --- PROGRAMME --- */
+        .program {
+            padding: 4rem 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+        }
+
+        .module-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary);
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .module-number {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .module-title {
+            font-size: 1.5rem;
+        }
+
+        .session {
+            margin-bottom: 1.5rem;
+        }
+
+        .session-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .session-title::before {
+            content: "•";
+            color: var(--accent);
+            font-size: 2rem;
+            line-height: 0;
+            margin-right: 10px;
+        }
+
+        .livrables {
+            background: #f0fdf4; /* Light green bg */
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* --- IA CAPSULE STYLE --- */
+        .ia-capsule {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3);
+        }
+
+        .ia-capsule h3 {
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .ia-capsule::after {
+            content: "NIVEAU INGÉNIEUR";
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 0.75rem;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-bottom-left-radius: 8px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .ia-desc {
+            font-size: 1.05rem;
+            color: #e2e8f0;
+        }
+
+        /* --- NOUVEAU DESIGN AUDIT SECTION (BEAUTIFUL) --- */
+        .audit-section {
+            background: var(--primary); /* Fond Bleu Nuit */
+            color: var(--white);
+            padding: 4rem 2rem;
+            margin: 5rem auto;
+            max-width: 900px; /* Centré et moins large */
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.4); /* Ombre profonde */
+        }
+
+        /* Effet de lueur verte en fond */
+        .audit-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .audit-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .audit-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .audit-section p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-offert {
+            background-color: var(--accent);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .audit-btn {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .audit-btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--accent);
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        /* --- PRICING --- */
+        .pricing {
+            background: #f1f5f9;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .price-card {
+            background: var(--white);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 6px solid var(--accent);
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .features-list {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            list-style: none;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .concept-container { grid-template-columns: 1fr; }
+            .audit-section { margin: 3rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Ma Com/<span class="highlight">munication</span></div>
+        <a href="#offre" class="cta-btn">Rejoindre l'aventure</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-tags">
+            <span class="tag">Communication</span>
+            <span class="tag">Ingénierie IA</span>
+        </div>
+        <h1>L'Art de Communiquer,<br>La Puissance de l'IA.</h1>
+        <p>Un accompagnement de 4 semaines pour définir votre message, structurer votre contenu et vendre vos offres. La seule formation qui allie <strong>stratégie humaine</strong> et <strong>systèmes automatisés</strong>.</p>
+        <a href="#programme" class="cta-btn">Découvrir le programme</a>
+    </section>
+
+    <section class="concept">
+        <div class="concept-container">
+            <div class="concept-col">
+                <h3>L'Expertise Humaine</h3>
+                <p>Avec Mathias.</p>
+                <p>On travaille le fond, la psychologie, l'émotion et le lien avec votre audience. Vous apprendrez à créer une marque forte qui résonne.</p>
+            </div>
+            <div class="concept-col">
+                <h3>L'Ingénierie IA</h3>
+                <p>Avec Matthieu.</p>
+                <p>On vous apprends à construire des <strong>systèmes</strong> (Agents, Clonage de voix/texte) pour automatiser la qualité sans perdre votre âme.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="program" id="programme">
+        <h2 class="section-title">4 Semaines pour tout changer</h2>
+
+        <div class="module-card">
+            <div class="module-header">
+                <div>
+                    <span class="module-number">Semaine 1</span>
+                    <span class="module-title">Clarifier</span>
+                </div>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 1.1 : Audit & Exploration (1:1)</div>
+                <p>Identification de vos blocages et objectifs business. On fait le ménage pour partir sur des bases saines.</p>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 1.2 : Positionnement Unique</div>
+                <p>Création de votre phrase matrice : "Qui j'aide + Avec quoi + Pourquoi moi". Utilisation du SWOT guidé.</p>
+            </div>
+            <div class="livrables">
+                <strong>Livrables :</strong> Diagnostic complet + Fiche de positionnement validée.
+            </div>
+        </div>
+
+        <div class="module-card">
+            <div class="module-header">
+                <div>
+                    <span class="module-number">Semaine 2</span>
+                    <span class="module-title">Structurer</span>
+                </div>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 2.1 : Stratégie de Contenu</div>
+                <p>Fin de la page blanche. Création de votre "Boîte à idées" (30 sujets) et mise en place du calendrier éditorial mensuel.</p>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 2.2 : L'Art de la Rédaction</div>
+                <p>Rédaction de 3 posts types (Valeur, Storytelling, Promo) avec feedback vidéo personnalisé (Loom).</p>
+            </div>
+            <div class="livrables">
+                <strong>Livrables :</strong> 30 idées de contenus + Calendrier prérempli + 3 posts validés.
+            </div>
+        </div>
+
+        <div class="ia-capsule">
+            <h3>L'Atelier Ingénieur : Clonage de Style & Sémantique</h3>
+            <div class="ia-desc">
+                <p>Le problème de l'IA ? Elle parle comme un robot. C'est fini.</p>
+                <p style="margin-top:10px">Dans ce module technique, nous allons extraire votre "ADN textuel". Je vous apprends à nourrir l'algorithme avec vos données pour qu'il <strong>clone votre style d'écriture</strong>. Vous générerez des posts qui vous ressemblent à 100%.</p>
+            </div>
+        </div>
+
+        <div class="module-card">
+            <div class="module-header">
+                <div>
+                    <span class="module-number">Semaine 3</span>
+                    <span class="module-title">Optimiser</span>
+                </div>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 3.1 : Branding & Visibilité</div>
+                <p>Audit visuel de vos réseaux. Harmonisation des couleurs, typographies et optimisation de la bio pour convertir les visiteurs.</p>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 3.2 : Engagement & Connexion</div>
+                <p>Apprendre à créer du lien humain. Stratégie de DM, commentaires et storytelling personnel.</p>
+            </div>
+            <div class="livrables">
+                <strong>Livrables :</strong> Plan d'optimisation + Checklist Branding + Plan d'engagement.
+            </div>
+        </div>
+
+        <div class="module-card">
+            <div class="module-header">
+                <div>
+                    <span class="module-number">Semaine 4</span>
+                    <span class="module-title">Convertir</span>
+                </div>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 4.1 : L'Offre Irrésistible</div>
+                <p>Identification des frustrations clients et construction de votre promesse de transformation. Structuration de votre offre (Prix/Format).</p>
+            </div>
+            <div class="session">
+                <div class="session-title">Séance 4.2 : Vendre sans forcer</div>
+                <p>Rédaction de posts de "vente douce". Création d'une séquence de lancement simple et authentique.</p>
+            </div>
+            <div class="livrables">
+                <strong>Livrables :</strong> Fiche Offre complète + 2 posts de vente prêts + Séquence de lancement.
+            </div>
+        </div>
+
+        <div class="ia-capsule">
+            <h3>L'Atelier Ingénieur : Création d'Agents (GPTs)</h3>
+            <div class="ia-desc">
+                <p>Ne perdez plus de temps à réexpliquer votre offre à ChatGPT à chaque fois.</p>
+                <p style="margin-top:10px">Nous allons coder (sans code) votre propre <strong>Agent Commercial IA</strong>. Il connaîtra vos prix, vos arguments et vos méthodes par cœur. Il deviendra votre "second cerveau" pour brainstormer, rédiger et traiter les objections client en pilote automatique.</p>
+            </div>
+        </div>
+
+        <div class="module-card" style="border-left-color: #f59e0b;">
+            <div class="module-header">
+                <div>
+                    <span class="module-number" style="background:#f59e0b">Bonus Final</span>
+                    <span class="module-title">Session de Clôture</span>
+                </div>
+            </div>
+            <div class="session">
+                <div class="session-title">Le Plan d'Action 30 Jours</div>
+                <p>Debrief global des 4 semaines. Construction de votre feuille de route pour continuer à avancer en autonomie après le coaching.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="audit-section">
+        <div class="audit-content">
+            <h2>Prêt à reprendre le contrôle ?</h2>
+            <p>Le premier audit de votre situation est <span class="badge-offert">OFFERT</span> (30 min).</p>
+            <p>Vérifions ensemble si le courant passe.</p>
+            <a href="#" class="audit-btn">Réserver mon appel découverte gratuit</a>
+        </div>
+    </section>
+
+    <section class="pricing" id="offre">
+        <h2 class="section-title">Investissez en vous</h2>
+        <div class="price-card">
+            <h3>Pack Accompagnement Complet</h3>
+            <div class="price">390€ <span>TTC</span></div>
+            <p style="color:var(--text-light); margin-bottom: 2rem;">Payable en 1 ou 3 fois</p>
+            
+            <ul class="features-list">
+                <li>4 Semaines de formation guidée</li>
+                <li>8 Séances (Visio & Asynchrone)</li>
+                <li>Corrections personnalisées (Loom)</li>
+                <li><strong>Modules Ingénieur IA (Clonage & Agents)</strong></li>
+                <li>Espace Notion & Workbooks inclus</li>
+                <li>Support WhatsApp 7j/7</li>
+            </ul>
+
+            <a href="#" class="cta-btn" style="display:block; width:100%;">Réserver ma place</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
