@@ -67,6 +67,12 @@
             color: var(--accent);
         }
 
+        .header-ctas {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .cta-btn {
             background-color: var(--primary);
             color: var(--white);
@@ -77,9 +83,26 @@
             transition: all 0.3s ease;
         }
 
+        .cta-btn-alt {
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
         .cta-btn:hover {
             background-color: var(--accent);
             transform: translateY(-2px);
+        }
+
+        .cta-btn-alt:hover {
+            background-color: var(--bg-light);
+            transform: translateY(-2px);
+            border-color: var(--accent);
         }
 
         /* --- HERO SECTION --- */
@@ -94,6 +117,14 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             line-height: 1.2;
+        }
+
+        .hero .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            max-width: 750px;
+            margin: -1rem auto 2rem auto;
+            font-style: italic;
         }
 
         .hero p {
@@ -296,6 +327,50 @@
             border-bottom-left-radius: 8px;
             font-weight: bold;
             letter-spacing: 1px;
+        }
+
+        /* --- TOOLS SECTION --- */
+        .tools-section {
+            padding: var(--section-padding) 5%;
+            background: var(--bg-light);
+        }
+
+        .tools-subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: -2rem auto 3rem auto;
+            color: var(--text-dark);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition-smooth);
+            border-top: 4px solid var(--primary);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
         .ia-desc {
@@ -578,6 +653,19 @@
             font-size: 0.9rem;
         }
 
+        .footer-legal {
+            margin-bottom: 1rem;
+        }
+
+        .footer-legal a {
+            color: var(--text-light);
+            margin: 0 0.5rem;
+        }
+
+        .footer-legal a:hover {
+            color: var(--white);
+        }
+
         .footer-contact {
             margin-bottom: 1.5rem;
         }
@@ -632,6 +720,7 @@
             .price { font-size: 2.8rem; }
             .lead-form { flex-direction: column; }
             .lead-magnet-box { padding: 2.5rem 1.5rem; }
+            .cta-btn-alt { display: none; }
             .audit-section { margin: var(--section-padding) 5%; padding: 3rem 1.5rem; }
         }
     </style>
@@ -640,7 +729,10 @@
 
     <header>
         <div class="logo">Ma Com/<span class="highlight">munication</span></div>
-        <a href="#offre" class="cta-btn">Rejoindre l'aventure</a>
+        <div class="header-ctas">
+            <a href="https://calendly.com/votre-lien" target="_blank" class="cta-btn-alt">Réserver un appel</a>
+            <a href="#offre" class="cta-btn">Rejoindre l'aventure</a>
+        </div>
     </header>
 
     <section class="hero">
@@ -649,7 +741,8 @@
             <span class="tag">Ingénierie IA</span>
         </div>
         <h1>Devenez Incontournable en Ligne.<br>Attirez vos Clients Idéaux avec l'IA.</h1>
-        <p>Idéal pour les <strong>freelances, coachs et consultants</strong>, cet accompagnement de 4 semaines vous apprend à définir votre message, structurer votre contenu et vendre vos offres. Alliez <strong>stratégie humaine</strong> et <strong>systèmes automatisés</strong> pour un impact maximal.</p>
+        <p class="hero-subtitle">Arrêtez de passer 10h/semaine sur des posts qui ne convertissent pas.</p>
+        <p>Idéal pour les <strong class="highlight">freelances, coachs et consultants</strong>, cet accompagnement de 4 semaines vous apprend à définir votre message, structurer votre contenu et vendre vos offres. Alliez <strong>stratégie humaine</strong> et <strong>systèmes automatisés</strong> pour un impact maximal.</p>
         <a href="#programme" class="cta-btn">Découvrir le programme</a>
     </section>
     
@@ -802,6 +895,29 @@
 
     </section>
 
+    <section class="tools-section reveal">
+        <h2 class="section-title">Les Outils que vous Maîtriserez</h2>
+        <p class="tools-subtitle">Nous vous formons sur des outils concrets et puissants, accessibles à tous.</p>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <span class="tool-name">ChatGPT / Claude</span>
+                <p class="tool-desc">Pour la génération de contenu et le brainstorming.</p>
+            </div>
+            <div class="tool-card">
+                <span class="tool-name">Notion</span>
+                <p class="tool-desc">Pour organiser votre stratégie et vos idées.</p>
+            </div>
+            <div class="tool-card">
+                <span class="tool-name">ElevenLabs</span>
+                <p class="tool-desc">Pour le clonage de voix et la création audio.</p>
+            </div>
+            <div class="tool-card">
+                <span class="tool-name">Canva</span>
+                <p class="tool-desc">Pour des visuels de marque professionnels.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="audit-section reveal">
         <div class="audit-content">
             <h2>Prêt à reprendre le contrôle ?</h2>
@@ -818,8 +934,8 @@
             <h3>Pack Accompagnement Complet</h3>
             <div class="price">390€ <span>TTC</span></div>
             <p style="color:var(--text-light); margin-bottom: 1rem;">Payable en 1 ou 3 fois sans frais</p>
-            <p style="font-size: 0.9rem; color: var(--text-dark);"><strong>Garantie Satisfaction :</strong> Si après la 1ère semaine, vous n'êtes pas convaincu, nous vous remboursons intégralement.</p>
-            
+            <p style="font-size: 0.9rem; color: var(--text-dark);"><strong>Garantie Satisfaction* :</strong> Si après la 1ère semaine, vous n'êtes pas convaincu, nous vous remboursons intégralement.</p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">*Sur présentation de vos exercices de la semaine 1 réalisés.</p>
             
             <ul class="features-list" style="margin-top: 2.5rem;">
                 <li>4 Semaines de formation guidée</li>
@@ -899,12 +1015,19 @@
         <div class="footer-contact">
             <p>Une question ? <a href="mailto:contact@macommunication.fr">contact@macommunication.fr</a></p>
         </div>
-        <p>&copy; 2024 Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
+        <div class="footer-legal">
+            <a href="#cgv">Conditions Générales de Vente</a> |
+            <a href="#confidentialite">Politique de confidentialité</a>
+        </div>
+        <p>&copy; <span id="current-year">2024</span> Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
     </footer>
 
     <!-- Emplacement pour le script du chat en direct (ex: Crisp, Tawk.to) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Dynamic Year in Footer ---
+            document.getElementById('current-year').textContent = new Date().getFullYear();
 
             // --- 1. Animation au défilement (Scroll Reveal) ---
             const revealElements = document.querySelectorAll('.reveal');
