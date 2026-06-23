@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ma Com/munication - Formation Hybride</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            --primary: #0f172a; /* Bleu Nuit */
-            --accent: #106db9; /* Bleu Action */
-            --accent-hover: #054996; /* Bleu Action Foncé */
-            --bg-light: #f8fafc;
-            --text-dark: #334155;
-            --text-light: #94a3b8;
-            --white: #ffffff;
-            --section-padding: 5rem;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --radius: 12px;
+            --primary: #050505; /* Noir Profond */
+            --secondary: #F4F4F4; /* Blanc Cassé */
+            --accent: #D4AF37; /* Or Vibrant */
+            --accent-hover: #c09b2e;
+
+            --text-on-primary: #F4F4F4;
+            --text-on-secondary: #050505;
+            --text-muted: #a0a0a0;
+
+            --font-serif: 'Lora', serif;
+            --font-sans: 'Inter', sans-serif;
+
+            --section-padding: 6rem;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+            --radius: 8px;
             --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -24,130 +32,113 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: var(--primary);
+            color: var(--text-on-primary);
             line-height: 1.6;
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* --- TYPOGRAPHY --- */
         h1, h2, h3 {
-            color: var(--primary);
+            font-family: var(--font-serif);
             font-weight: 700;
+            line-height: 1.2;
         }
 
         .highlight {
             color: var(--accent);
         }
 
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
         /* --- HEADER --- */
         header {
-            background: var(--white);
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(244, 244, 244, 0.1);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--secondary);
             letter-spacing: -1px;
         }
 
-        .logo span {
-            color: var(--accent);
-        }
-
-        .header-ctas {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
         .cta-btn {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn-alt {
-            background-color: var(--white);
+            background-color: var(--accent);
             color: var(--primary);
             padding: 0.8rem 1.5rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--accent);
         }
 
         .cta-btn:hover {
-            background-color: var(--accent);
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
             transform: translateY(-2px);
         }
 
-        .cta-btn-alt:hover {
-            background-color: var(--bg-light);
-            transform: translateY(-2px);
-            border-color: var(--accent);
+        .cta-btn-outline {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+        }
+        .cta-btn-outline:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
         }
 
         /* --- HERO SECTION --- */
         .hero {
             text-align: center;
-            padding: calc(var(--section-padding) + 1rem) 5%;
-            max-width: 1200px;
+            padding: calc(var(--section-padding) + 2rem) 5%;
+            max-width: 900px;
             margin: 0 auto;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
-            line-height: 1.2;
+            color: var(--secondary);
+            font-family: var(--font-serif);
         }
 
         .hero .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            max-width: 750px;
-            margin: -1rem auto 2rem auto;
-            font-style: italic;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-dark);
-            max-width: 750px;
-            margin: 0 auto 2.5rem auto;
-        }
-
-        .hero-tags {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background: #e2e8f0;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin: 0 auto 3rem auto;
         }
 
         /* --- CONCEPT SECTION (DUO) --- */
@@ -155,20 +146,29 @@
             background: var(--primary);
             color: var(--white);
             padding: var(--section-padding) 5%;
+            text-align: center;
+        }
+
+        .concept h2 {
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-size: 2.2rem;
         }
 
         .concept-container {
             max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 3rem;
+            margin-top: 4rem;
         }
 
         .concept-col h3 {
             color: var(--accent);
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
 
         /* --- ABOUT US --- */
@@ -178,24 +178,37 @@
             margin: 0 auto;
         }
 
+        /* --- SOLUTION SECTION --- */
+        .solution {
+            background: var(--secondary);
+            color: var(--text-on-secondary);
+            padding: var(--section-padding) 5%;
+        }
+
         .about-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin-top: 3rem;
         }
-
-        .about-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
+        
+        .solution .about-container {
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2.5rem;
         }
 
-        .about-card h3 {
-            font-size: 1.3rem;
-            color: var(--primary);
+        .solution .about-card {
+            text-align: left;
+        }
+
+        .solution .about-card .icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .solution .about-card h3 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
         }
 
@@ -203,19 +216,21 @@
             color: var(--text-dark);
         }
 
-        /* --- PROGRAMME --- */
+        /* --- PROGRAMME (LE PARCOURS) --- */
         .program {
             padding: var(--section-padding) 5%;
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
+            background: var(--secondary);
+            color: var(--text-on-secondary);
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.2rem;
+        .program .section-title, .program .section-subtitle {
+            color: var(--text-on-secondary);
         }
+        .program .section-subtitle { color: #555; }
 
+        /* --- OLD MODULE CARD --- */
         .module-card {
             background: var(--white);
             border-radius: var(--radius);
@@ -226,6 +241,7 @@
             transition: var(--transition-smooth);
         }
 
+        /* --- OLD MODULE HEADER --- */
         .module-header {
             display: flex;
             align-items: center;
@@ -235,6 +251,7 @@
             padding-bottom: 1rem;
         }
 
+        /* --- OLD MODULE ICON --- */
         .module-header-icon {
             flex-shrink: 0;
             background-color: var(--bg-light);
@@ -249,6 +266,7 @@
             height: 24px;
         }
 
+        /* --- OLD MODULE NUMBER --- */
         .module-number {
             background: var(--primary);
             color: var(--white);
@@ -260,10 +278,12 @@
             margin-right: 1rem;
         }
 
+        /* --- OLD MODULE TITLE --- */
         .module-title {
             font-size: 1.5rem;
         }
 
+        /* --- OLD SESSION --- */
         .session {
             margin-bottom: 1.5rem;
         }
@@ -284,6 +304,7 @@
             margin-right: 10px;
         }
 
+        /* --- OLD LIVRABLES --- */
         .livrables {
             background: #f0fdf4; /* Light green bg */
             padding: 1rem;
@@ -294,6 +315,7 @@
         }
 
         /* --- IA CAPSULE STYLE --- */
+        /* This style is being retired for a more integrated look */
         .ia-capsule {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: var(--white);
@@ -330,6 +352,7 @@
         }
 
         /* --- TOOLS SECTION --- */
+        /* This section is being retired */
         .tools-section {
             padding: var(--section-padding) 5%;
             background: var(--bg-light);
@@ -379,6 +402,7 @@
         }
 
         /* --- NOUVEAU DESIGN AUDIT SECTION (BEAUTIFUL) --- */
+        /* This section is being retired in favor of a final CTA section */
         .audit-section {
             background: var(--primary); /* Fond Bleu Nuit */
             color: var(--white);
@@ -451,14 +475,15 @@
         }
 
         /* --- PRICING --- */
-        .pricing {
-            background: #f1f5f9;
+        .offer {
+            background: var(--primary);
             padding: var(--section-padding) 5%;
             text-align: center;
         }
 
         .price-card {
-            background: var(--white);
+            background: #111;
+            color: var(--secondary);
             max-width: 500px;
             margin: 0 auto;
             padding: 3rem;
@@ -466,18 +491,23 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border-top: 6px solid var(--accent);
             transition: var(--transition-smooth);
+            border: 1px solid rgba(244, 244, 244, 0.1);
+        }
+
+        .price-card h3 {
+            color: var(--secondary);
         }
 
         .price {
             font-size: 3.5rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--secondary);
             margin: 1rem 0;
         }
 
         .price span {
             font-size: 1.2rem;
-            color: var(--text-light);
+            color: var(--text-muted);
             font-weight: 400;
         }
 
@@ -502,6 +532,7 @@
         }
 
         /* --- LEAD MAGNET --- */
+        /* This section is being retired for a more focused funnel */
         .lead-magnet {
             background: var(--bg-light);
             padding: var(--section-padding) 5%;
@@ -577,6 +608,7 @@
         }
 
         /* --- CAROUSELS (pour Programme et Avis) --- */
+        /* This is being replaced by a static case study section */
         .carousel {
             display: flex;
             gap: 1.5rem; /* 24px */
@@ -591,26 +623,30 @@
         }
 
         /* --- SECTION AVIS (TESTIMONIALS) --- */
-        .testimonials {
-            padding: var(--section-padding) 0;
-            background: var(--bg-light);
+        .case-studies {
+            padding: var(--section-padding) 5%;
+            background: var(--primary);
         }
 
-        .testimonials .carousel {
-            scroll-snap-type: x mandatory;
+        .case-studies .section-title { color: var(--secondary); }
+
+        .case-study-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 4rem auto 0 auto;
         }
 
         .testimonial-card {
-            scroll-snap-align: start;
-            flex: 0 0 85%; /* Largeur de la carte sur mobile */
-            background: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
             border-radius: var(--radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            border-left: 4px solid var(--accent);
-            transition: var(--transition-smooth);
+            background: #111;
+            padding: 3rem;
+            border: 1px solid rgba(244, 244, 244, 0.1);
         }
 
         @media (min-width: 768px) {
@@ -618,17 +654,29 @@
         }
 
         .testimonial-text {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-style: italic;
-            color: var(--text-dark);
-            flex-grow: 1; /* Permet au texte de prendre l'espace dispo */
+            color: var(--secondary);
+            line-height: 1.7;
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
         }
 
         .testimonial-author {
             margin-top: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--secondary);
             text-align: right;
+        }
+
+        .case-study-stats {
+            text-align: center;
+        }
+        .case-study-stats .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: var(--font-serif);
         }
 
         /* --- ANIMATIONS --- */
@@ -638,10 +686,9 @@
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
-        /* Effet de zoom au survol (remplace l'effet d'inclinaison) */
-        .tilt-card:hover,
-        .testimonial-card:hover {
-            transform: scale(1.03);
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
         }
 
         /* --- FOOTER --- */
@@ -654,16 +701,16 @@
         }
 
         .footer-legal {
-            margin-bottom: 1rem;
+            margin: 1rem 0;
         }
 
         .footer-legal a {
-            color: var(--text-light);
+            color: var(--text-muted);
             margin: 0 0.5rem;
         }
 
         .footer-legal a:hover {
-            color: var(--white);
+            color: var(--secondary);
         }
 
         .footer-contact {
@@ -671,7 +718,7 @@
         }
 
         .footer-contact a {
-            color: var(--white);
+            color: var(--secondary);
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;
@@ -700,20 +747,25 @@
         .faq-answer {
             padding: 0 1.2rem 1.2rem 1.2rem;
             color: var(--text-dark);
-            border-top: 1px solid #e2e8f0;
         }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             :root {
-                --section-padding: 3.5rem;
+                --section-padding: 4rem;
             }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .concept-container {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .hero-subtitle { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .solution .about-container { grid-template-columns: 1fr; }
+            .testimonial-card {
                 grid-template-columns: 1fr;
+                padding: 2rem;
                 gap: 2rem;
             }
+            .case-study-stats { margin-bottom: 1rem; }
+            .testimonial-text { font-size: 1.1rem; }
+
             .about-container { grid-template-columns: 1fr; }
             .section-title { font-size: 1.8rem; }
             .price-card { padding: 2rem; }
@@ -728,219 +780,77 @@
 <body>
 
     <header>
-        <div class="logo">Ma Com/<span class="highlight">munication</span></div>
-        <div class="header-ctas">
-            <a href="https://calendly.com/votre-lien" target="_blank" class="cta-btn-alt">Réserver un appel</a>
-            <a href="#offre" class="cta-btn">Rejoindre l'aventure</a>
-        </div>
+        <div class="logo">Ma Com<span class="highlight">/</span>munication</div>
+        <a href="#parcours" class="cta-btn cta-btn-outline">Découvrir la Méthode</a>
     </header>
 
     <section class="hero">
-        <div class="hero-tags">
-            <span class="tag">Communication</span>
-            <span class="tag">Ingénierie IA</span>
-        </div>
-        <h1>Gagnez 10h par semaine grâce à l'IA<br>sans jamais perdre votre voix.</h1>
-        <p class="hero-subtitle">Arrêtez de passer 10h/semaine sur des posts qui ne convertissent pas.</p>
-        <p>Idéal pour les <strong class="highlight">freelances, coachs et consultants</strong>, cet accompagnement de 4 semaines vous apprend à définir votre message, structurer votre contenu et vendre vos offres. Alliez <strong>stratégie humaine</strong> et <strong>systèmes automatisés</strong> pour un impact maximal.</p>
-        <a href="#programme" class="cta-btn">Découvrir le programme</a>
+        <h1 class="reveal">Devenez l'Évidence.</h1>
+        <p class="hero-subtitle reveal">Votre Expertise, Amplifiée par l'IA. Arrêtez de créer du contenu. Commencez à bâtir une audience qui achète.</p>
+        <a href="#offre" class="cta-btn reveal">Postuler à l'Accompagnement</a>
     </section>
     
     <section class="concept">
-        <div style="max-width: 1000px; margin: 0 auto 3rem auto; text-align: center;">
-            <h2 class="section-title" style="color: var(--white); margin-bottom: 1rem;">Le Problème avec l'IA "Classique"</h2>
-            <p style="color: var(--text-light); max-width: 700px; margin: 0 auto;">Les générateurs de contenu standards créent des textes robotiques qui nuisent à votre crédibilité. Votre audience sent l'imposture. Notre approche est radicalement différente, en alliant le meilleur des deux mondes :</p>
-        </div>
+        <h2 class="reveal">L'IA seule est une impasse.</h2>
+        <p class="section-subtitle reveal" style="color: var(--text-muted);">Vous avez testé ChatGPT. Les textes sont fades, sans âme. Votre audience le sent. <br>Cette course à la productivité vous fait perdre ce qui vous rend unique : votre voix.</p>
+    </section>
+
+    <section class="solution reveal">
+        <h2 class="section-title">Notre méthode : L'Alliance.</h2>
+        <p class="section-subtitle">La Stratégie Humaine rencontre l'Ingénierie IA.</p>
         <div class="concept-container">
-            <div class="concept-col">
-                <h3>L'Expertise Humaine</h3>
-                <p>Avec Mathias.</p>
-                <p>On travaille le fond, la psychologie, l'émotion et le lien avec votre audience. Vous apprendrez à créer une marque forte qui résonne.</p>
-            </div>
-            <div class="concept-col">
-                <h3>L'Ingénierie IA</h3>
-                <p>Avec Matthieu.</p>
-                <p>On vous apprends à construire des <strong>systèmes</strong> (Agents, Clonage de voix/texte) pour automatiser la qualité sans perdre votre âme.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="about-us reveal">
-        <h2 class="section-title">Vos Guides</h2>
-        <div class="about-container">
             <div class="about-card">
-                <h3>Mathias - Le Stratège Humain</h3>
-                <p>Expert en branding et en psychologie de la vente, Mathias vous aide à construire un message qui touche le cœur de votre audience. Son super-pouvoir : transformer votre expertise en une marque magnétique.</p>
+                <div class="icon">🧠</div>
+                <h3>Votre Cerveau Stratégique</h3>
+                <p>On définit votre message, votre ton, votre singularité. C'est le socle humain qui rend votre communication inimitable.</p>
             </div>
             <div class="about-card">
-                <h3>Matthieu - L'Ingénieur IA</h3>
-                <p>Développeur et spécialiste de l'IA, Matthieu démystifie la technologie. Il vous apprend à bâtir des systèmes intelligents qui travaillent pour vous, vous libérant du temps pour vous concentrer sur ce que vous aimez.</p>
+                <div class="icon">🤖</div>
+                <h3>Votre Clone Digital</h3>
+                <p>On entraîne une IA à écrire et penser comme vous. Fini le style robotique, bonjour l'authenticité à grande échelle.</p>
+            </div>
+            <div class="about-card">
+                <div class="icon">⚡️</div>
+                <h3>Votre Assistant Autonome</h3>
+                <p>On bâtit des systèmes qui exécutent les tâches à votre place. Vous ne repartez pas avec des notes, mais avec un assistant qui travaille pour vous.</p>
             </div>
         </div>
     </section>
 
-    <section class="program" id="programme">
-        <h2 class="section-title">4 Semaines pour tout changer</h2>
-        <p style="text-align: center; max-width: 700px; margin: -2rem auto 3rem auto;">Notre programme unique vous apprend à maîtriser l'IA pour créer du contenu authentique qui vous ressemble. Grâce à notre méthode de "clonage de style", vous automatiserez votre production tout en renforçant votre marque. Voici comment :</p>
-
-        <div class="module-card tilt-card reveal">
-            <div class="module-header">
-                <div class="module-header-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+    <section class="case-studies reveal">
+        <h2 class="section-title">Les Transformations.</h2>
+        <p class="section-subtitle">Nous ne vendons pas une formation. Nous provoquons des résultats.</p>
+        <div class="case-study-grid">
+            <div class="testimonial-card">
+                <div class="case-study-stats">
+                    <div class="stat-number">+200%</div>
+                    <p>d'engagement</p>
+                    <div class="stat-number" style="margin-top: 1rem;">8h</div>
+                    <p>gagnées / semaine</p>
                 </div>
                 <div>
-                    <span class="module-number">Semaine 1</span>
-                    <span class="module-title">Clarifier</span>
+                    <p class="testimonial-text">"Je me concentre enfin sur le coaching, pas sur l'algorithme. En 30 jours, j'ai gagné 3 nouveaux clients et une clarté que je n'avais jamais eue."</p>
+                    <p class="testimonial-author">- Claire D., Coach en Nutrition</p>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 1.1 : Audit & Exploration (1:1)</div>
-                <p>On identifie vos blocages et objectifs pour partir sur des bases saines.</p>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 1.2 : Positionnement Unique</div>
-                <p>Création de votre phrase-matrice pour définir qui vous aidez et pourquoi vous êtes le meilleur choix.</p>
-            </div>
-            <div class="livrables">
-                <strong>Livrables :</strong> Diagnostic complet + Fiche de positionnement validée.
-            </div>
-        </div>
-        <div class="module-card tilt-card reveal">
-            <div class="module-header">
-                <div class="module-header-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 8.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
-                </div>
-                <div>
-                    <span class="module-number">Semaine 2</span>
-                    <span class="module-title">Structurer</span>
-                </div>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 2.1 : Stratégie de Contenu</div>
-                <p>Fini la page blanche. Créez votre "Boîte à idées" (30 sujets) et votre calendrier éditorial.</p>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 2.2 : L'Art de la Rédaction</div>
-                <p>Rédigez 3 posts clés (Valeur, Storytelling, Promo) et recevez un feedback vidéo personnalisé.</p>
-            </div>
-            <div class="livrables">
-                <strong>Livrables :</strong> 30 idées de contenus + Calendrier prérempli + 3 posts validés.
-            </div>
-        </div>
-        <div class="ia-capsule reveal">
-            <h3>L'Atelier Ingénieur : Clonage de Style & Sémantique</h3>
-            <div class="ia-desc">
-                <p>Le problème de l'IA ? Un style impersonnel. On corrige ça.</p>
-                <p style="margin-top:10px">Dans cet atelier, on apprend à l'IA à écrire <strong>comme vous</strong>. Fini le ton robotique, vos contenus générés seront 100% authentiques et fidèles à votre marque.</p>
-            </div>
-        </div>
-        <div class="module-card tilt-card reveal">
-            <div class="module-header">
-                <div class="module-header-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" /></svg>
-                </div>
-                <div>
-                    <span class="module-number">Semaine 3</span>
-                    <span class="module-title">Optimiser</span>
-                </div>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 3.1 : Branding & Visibilité</div>
-                <p>Audit visuel de vos réseaux. On harmonise votre image de marque et on optimise votre bio pour convertir.</p>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 3.2 : Engagement & Connexion</div>
-                <p>Apprenez à créer du lien humain avec une stratégie de messages, commentaires et storytelling.</p>
-            </div>
-            <div class="livrables">
-                <strong>Livrables :</strong> Plan d'optimisation + Checklist Branding + Plan d'engagement.
-            </div>
-        </div>
-        <div class="module-card tilt-card reveal">
-            <div class="module-header">
-                <div class="module-header-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" /></svg>
-                </div>
-                <div>
-                    <span class="module-number">Semaine 4</span>
-                    <span class="module-title">Convertir</span>
-                </div>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 4.1 : L'Offre Irrésistible</div>
-                <p>On transforme les frustrations de vos clients en une promesse forte. Structure de votre offre (Prix/Format).</p>
-            </div>
-            <div class="session">
-                <div class="session-title">Séance 4.2 : Vendre sans forcer</div>
-                <p>Rédaction de posts de "vente douce" et création d'une séquence de lancement simple et authentique.</p>
-            </div>
-            <div class="livrables">
-                <strong>Livrables :</strong> Fiche Offre complète + 2 posts de vente prêts + Séquence de lancement.
-            </div>
-        </div>
-        <div class="ia-capsule reveal">
-            <h3>L'Atelier Ingénieur : Création d'Agents (GPTs)</h3>
-            <div class="ia-desc">
-                <p>Imaginez un assistant personnel qui connaît votre business sur le bout des doigts.</p>
-                <p style="margin-top:10px">Nous allons créer (sans une ligne de code) votre propre <strong>Agent IA personnel</strong>. Il vous aidera à rédiger, brainstormer et répondre à vos clients, 24h/24.</p>
-            </div>
-        </div>
-        <div class="module-card tilt-card reveal" style="border-left-color: #f59e0b;">
-            <div class="module-header">
-                <div>
-                    <span class="module-number" style="background:#f59e0b">Bonus Final</span>
-                    <span class="module-title">Session de Clôture</span>
-                </div>
-            </div>
-            <div class="session">
-                <div class="session-title">Le Plan d'Action 30 Jours</div>
-                <p>Debrief global des 4 semaines. Construction de votre feuille de route pour continuer à avancer en autonomie après le coaching.</p>
-            </div>
-        </div>
-
-    </section>
-
-    <section class="tools-section reveal">
-        <h2 class="section-title">Les Outils que vous Maîtriserez</h2>
-        <p class="tools-subtitle">Nous vous formons sur des outils concrets et puissants, accessibles à tous.</p>
-        <div class="tools-grid">
-            <div class="tool-card">
-                <span class="tool-name">ChatGPT / Claude</span>
-                <p class="tool-desc">Pour la génération de contenu et le brainstorming.</p>
-            </div>
-            <div class="tool-card">
-                <span class="tool-name">Notion</span>
-                <p class="tool-desc">Pour organiser votre stratégie et vos idées.</p>
-            </div>
-            <div class="tool-card">
-                <span class="tool-name">ElevenLabs</span>
-                <p class="tool-desc">Pour le clonage de voix et la création audio.</p>
-            </div>
-            <div class="tool-card">
-                <span class="tool-name">Canva</span>
-                <p class="tool-desc">Pour des visuels de marque professionnels.</p>
             </div>
         </div>
     </section>
 
-    <section class="audit-section reveal">
-        <div class="audit-content">
-            <h2>Prêt à reprendre le contrôle ?</h2>
-            <p>Le premier audit de votre situation est <span class="badge-offert">OFFERT</span> (15 min).</p>
-            <p>Vérifions ensemble si le courant passe.</p>
-            <a href="https://calendly.com/votre-lien" target="_blank" class="audit-btn">Réserver mon appel découverte</a>
-        </div>
+    <section class="program" id="parcours">
+        <h2 class="section-title">Le Parcours.</h2>
+        <p class="section-subtitle">Pendant 4 semaines, nous ne vous donnons pas des leçons, nous construisons avec vous. De la Clarification de votre message à la Création de votre premier Agent IA, chaque étape est un livrable concret.</p>
+        <!-- Le contenu détaillé du programme peut être ajouté ici, par exemple dans des <details> pour un look épuré -->
     </section>
 
-    <section class="pricing" id="offre">
-        <h2 class="section-title">Investissez en vous</h2>
-        <div class="price-card tilt-card reveal">
+    <section class="offer" id="offre">
+        <h2 class="section-title" style="color: var(--secondary);">Un Investissement, pas une Dépense.</h2>
+        <div class="price-card reveal">
             <p style="font-weight: 600; color: var(--accent);">⚠️ Places limitées à 8 personnes par cohorte.</p>
             <h3>Pack Accompagnement Complet</h3>
             <div class="price">390€ <span>TTC</span></div>
-            <p style="color:var(--text-light); margin-bottom: 1rem;">Payable en 1 ou 3 fois sans frais</p>
-            <p style="font-size: 0.9rem; color: var(--text-dark);"><strong>Garantie Satisfaction* :</strong> Si après la 1ère semaine, vous n'êtes pas convaincu, nous vous remboursons intégralement.</p>
-            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">*Sur présentation de vos exercices de la semaine 1 réalisés.</p>
+            <p style="color:var(--text-muted); margin-bottom: 1rem;">Payable en 1 ou 3 fois sans frais</p>
+            <p style="font-size: 0.9rem; color: var(--secondary);"><strong>Garantie Satisfaction* :</strong> Si après la 1ère semaine, vous n'êtes pas convaincu, nous vous remboursons intégralement.</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">*Sur présentation de vos exercices de la semaine 1 réalisés.</p>
             
             <ul class="features-list" style="margin-top: 2.5rem;">
                 <li>4 Semaines de formation guidée</li>
@@ -951,45 +861,12 @@
                 <li>Support WhatsApp 7j/7</li>
             </ul>
 
-            <a href="https://votre-lien-de-paiement.com" class="cta-btn" style="display:block; width:100%;">Je rejoins la prochaine cohorte</a>
+            <a href="https://votre-lien-de-paiement.com" class="cta-btn" style="display:block; width:100%; margin-top: 2rem;">Postuler à l'Accompagnement</a>
         </div>
     </section>
 
-    <section class="lead-magnet reveal">
-        <div class="lead-magnet-box">
-            <h2>Pas encore prêt à sauter le pas ?</h2>
-            <p>Recevez notre guide gratuit "5 Prompts IA pour ne plus jamais avoir la page blanche" et découvrez un avant-goût de la puissance de nos méthodes.</p>
-            <form class="lead-form">
-                <input type="email" placeholder="Votre adresse e-mail" required>
-                <button type="submit" class="cta-btn">Je télécharge le guide IA</button>
-            </form>
-        </div>
-    </section>
-
-    
-
-
-
-    <section class="testimonials reveal">
-        <h2 class="section-title">Ce qu'ils en pensent</h2>
-        <div class="carousel">
-            <div class="testimonial-card">
-                <p class="testimonial-text">"J'étais perdu dans ma communication. En 4 semaines, j'ai non seulement une stratégie claire, mais aussi des outils IA qui me font gagner un temps fou. C'est une révolution."</p>
-                <p class="testimonial-author">- Claire D., Coach en nutrition</p>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">"L'alliance de la stratégie humaine et de l'ingénierie IA est juste bluffante. Matthieu et Mathias sont hyper complémentaires. On se sent vraiment accompagné de A à Z."</p>
-                <p class="testimonial-author">- Julien L., Consultant Freelance</p>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">"Le module sur le clonage de style a changé ma vie. Je peux enfin déléguer la rédaction de certains contenus sans perdre mon identité. Le gain de temps est colossal."</p>
-                <p class="testimonial-author">- Sophie M., Créatrice de contenu</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq reveal" id="faq">
-        <h2 class="section-title">Vos questions, nos réponses</h2>
+    <section class="faq reveal" id="faq" style="background: var(--secondary); color: var(--text-on-secondary);">
+        <h2 class="section-title" style="color: var(--text-on-secondary);">Vos questions, nos réponses</h2>
         <details class="faq-item">
             <summary>Je n'y connais rien en IA, est-ce pour moi ?</summary>
             <div class="faq-answer">
@@ -1024,7 +901,7 @@
             <a href="#cgv">Conditions Générales de Vente</a> |
             <a href="#confidentialite">Politique de confidentialité</a>
         </div>
-        <p>&copy; <span id="current-year">2024</span> Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
+        <p>&copy; <span id="current-year"></span> Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
     </footer>
 
     <!-- Emplacement pour le script du chat en direct (ex: Crisp, Tawk.to) -->
@@ -1053,63 +930,6 @@
             revealElements.forEach(el => {
                 observer.observe(el);
             });
-
-            // L'effet de zoom au survol (anciennement "tilt effect") est maintenant géré en CSS.
-            // C'est plus simple et plus performant.
-
-            // --- 3. Auto-scrolling Carousels ---
-            function setupContinuousScroll(carousel, pixelsPerSecond = 50) {
-                // On désactive le "snap" pour permettre une animation fluide
-                carousel.style.scrollSnapType = 'none';
-                // On cache la barre de défilement qui n'est plus utile
-                carousel.style.overflowX = 'hidden';
-
-                // On ne fait rien si le contenu n'est pas assez long pour défiler
-                if (carousel.scrollWidth <= carousel.clientWidth) {
-                    return;
-                }
-
-                // On duplique le contenu pour créer une boucle parfaite
-                const items = Array.from(carousel.children);
-                items.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    clone.setAttribute('aria-hidden', 'true');
-                    carousel.appendChild(clone);
-                });
-
-                let animationFrameId;
-                
-                const scrollStep = () => {
-                    carousel.scrollLeft += pixelsPerSecond / 60; // Vitesse basée sur 60 images/seconde
-
-                    // Quand la première moitié a défilé, on repart du début sans que ça se voie
-                    if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
-                        carousel.scrollLeft = 0;
-                    }
-                    animationFrameId = requestAnimationFrame(scrollStep);
-                };
-
-                const startScrolling = () => {
-                    cancelAnimationFrame(animationFrameId); // On s'assure qu'il n'y a pas plusieurs animations en même temps
-                    animationFrameId = requestAnimationFrame(scrollStep);
-                };
-
-                const stopScrolling = () => {
-                    cancelAnimationFrame(animationFrameId);
-                };
-
-                startScrolling();
-
-                // On met en pause au survol de la souris pour une meilleure expérience utilisateur
-                carousel.addEventListener('mouseenter', stopScrolling);
-                carousel.addEventListener('mouseleave', startScrolling);
-            }
-
-            const testimonialsCarousel = document.querySelector('.testimonials .carousel');
-
-            if (testimonialsCarousel) {
-                setupContinuousScroll(testimonialsCarousel, 40); // Vitesse plus lente pour les avis
-            }
         });
     </script>
 </body>
