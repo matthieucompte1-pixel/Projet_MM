@@ -16,6 +16,7 @@
             --white: #ffffff;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --radius: 12px;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
@@ -158,6 +159,7 @@
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
             border-left: 5px solid var(--primary);
+            transition: var(--transition-smooth);
         }
 
         .module-header {
@@ -343,6 +345,7 @@
             border-radius: var(--radius);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border-top: 6px solid var(--accent);
+            transition: var(--transition-smooth);
         }
 
         .price {
@@ -378,6 +381,76 @@
             font-weight: bold;
         }
 
+        /* --- CAROUSELS (pour Programme et Avis) --- */
+        .carousel {
+            display: flex;
+            gap: 1.5rem; /* 24px */
+            overflow-x: auto;
+            padding: 0.5rem 5% 1.5rem 5%; /* Espace pour le scroll et l'ombre */
+            /* Masquer la barre de scroll */
+            -ms-overflow-style: none;  /* IE et Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .carousel::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* --- SECTION AVIS (TESTIMONIALS) --- */
+        .testimonials {
+            padding: 4rem 5%;
+            background: var(--bg-light);
+            padding-left: 0; /* Le padding est maintenant sur le carousel */
+            padding-right: 0;
+        }
+
+        .testimonials .carousel {
+            scroll-snap-type: x mandatory;
+        }
+
+        .testimonial-card {
+            scroll-snap-align: start;
+            flex: 0 0 85%; /* Largeur de la carte sur mobile */
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            border-left: 4px solid var(--accent);
+            transition: var(--transition-smooth);
+        }
+
+        @media (min-width: 768px) {
+            .testimonial-card { flex: 0 0 400px; } /* Largeur fixe sur tablette et + */
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-dark);
+            flex-grow: 1; /* Permet au texte de prendre l'espace dispo */
+        }
+
+        .testimonial-author {
+            margin-top: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: right;
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Effet de zoom au survol (remplace l'effet d'inclinaison) */
+        .tilt-card:hover,
+        .testimonial-card:hover {
+            transform: scale(1.03);
+        }
+
         /* --- FOOTER --- */
         footer {
             background: var(--primary);
@@ -411,7 +484,7 @@
         <p>Un accompagnement de 4 semaines pour définir votre message, structurer votre contenu et vendre vos offres. La seule formation qui allie <strong>stratégie humaine</strong> et <strong>systèmes automatisés</strong>.</p>
         <a href="#programme" class="cta-btn">Découvrir le programme</a>
     </section>
-
+    
     <section class="concept">
         <div class="concept-container">
             <div class="concept-col">
@@ -430,7 +503,7 @@
     <section class="program" id="programme">
         <h2 class="section-title">4 Semaines pour tout changer</h2>
 
-        <div class="module-card">
+        <div class="module-card tilt-card reveal">
             <div class="module-header">
                 <div>
                     <span class="module-number">Semaine 1</span>
@@ -449,8 +522,7 @@
                 <strong>Livrables :</strong> Diagnostic complet + Fiche de positionnement validée.
             </div>
         </div>
-
-        <div class="module-card">
+        <div class="module-card tilt-card reveal">
             <div class="module-header">
                 <div>
                     <span class="module-number">Semaine 2</span>
@@ -469,16 +541,14 @@
                 <strong>Livrables :</strong> 30 idées de contenus + Calendrier prérempli + 3 posts validés.
             </div>
         </div>
-
-        <div class="ia-capsule">
+        <div class="ia-capsule reveal">
             <h3>L'Atelier Ingénieur : Clonage de Style & Sémantique</h3>
             <div class="ia-desc">
                 <p>Le problème de l'IA ? Elle parle comme un robot. C'est fini.</p>
                 <p style="margin-top:10px">Dans ce module technique, nous allons extraire votre "ADN textuel". Je vous apprends à nourrir l'algorithme avec vos données pour qu'il <strong>clone votre style d'écriture</strong>. Vous générerez des posts qui vous ressemblent à 100%.</p>
             </div>
         </div>
-
-        <div class="module-card">
+        <div class="module-card tilt-card reveal">
             <div class="module-header">
                 <div>
                     <span class="module-number">Semaine 3</span>
@@ -497,8 +567,7 @@
                 <strong>Livrables :</strong> Plan d'optimisation + Checklist Branding + Plan d'engagement.
             </div>
         </div>
-
-        <div class="module-card">
+        <div class="module-card tilt-card reveal">
             <div class="module-header">
                 <div>
                     <span class="module-number">Semaine 4</span>
@@ -517,16 +586,14 @@
                 <strong>Livrables :</strong> Fiche Offre complète + 2 posts de vente prêts + Séquence de lancement.
             </div>
         </div>
-
-        <div class="ia-capsule">
+        <div class="ia-capsule reveal">
             <h3>L'Atelier Ingénieur : Création d'Agents (GPTs)</h3>
             <div class="ia-desc">
                 <p>Ne perdez plus de temps à réexpliquer votre offre à ChatGPT à chaque fois.</p>
                 <p style="margin-top:10px">Nous allons coder (sans code) votre propre <strong>Agent Commercial IA</strong>. Il connaîtra vos prix, vos arguments et vos méthodes par cœur. Il deviendra votre "second cerveau" pour brainstormer, rédiger et traiter les objections client en pilote automatique.</p>
             </div>
         </div>
-
-        <div class="module-card" style="border-left-color: #f59e0b;">
+        <div class="module-card tilt-card reveal" style="border-left-color: #f59e0b;">
             <div class="module-header">
                 <div>
                     <span class="module-number" style="background:#f59e0b">Bonus Final</span>
@@ -541,7 +608,7 @@
 
     </section>
 
-    <section class="audit-section">
+    <section class="audit-section reveal">
         <div class="audit-content">
             <h2>Prêt à reprendre le contrôle ?</h2>
             <p>Le premier audit de votre situation est <span class="badge-offert">OFFERT</span> (30 min).</p>
@@ -552,7 +619,7 @@
 
     <section class="pricing" id="offre">
         <h2 class="section-title">Investissez en vous</h2>
-        <div class="price-card">
+        <div class="price-card tilt-card reveal">
             <h3>Pack Accompagnement Complet</h3>
             <div class="price">390€ <span>TTC</span></div>
             <p style="color:var(--text-light); margin-bottom: 2rem;">Payable en 1 ou 3 fois</p>
@@ -570,9 +637,108 @@
         </div>
     </section>
 
+    <section class="testimonials reveal">
+        <h2 class="section-title">Ce qu'ils en pensent</h2>
+        <div class="carousel">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"J'étais perdu dans ma communication. En 4 semaines, j'ai non seulement une stratégie claire, mais aussi des outils IA qui me font gagner un temps fou. C'est une révolution."</p>
+                <p class="testimonial-author">- Claire D., Coach en nutrition</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"L'alliance de la stratégie humaine et de l'ingénierie IA est juste bluffante. Matthieu et Mathias sont hyper complémentaires. On se sent vraiment accompagné de A à Z."</p>
+                <p class="testimonial-author">- Julien L., Consultant Freelance</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Le module sur le clonage de style a changé ma vie. Je peux enfin déléguer la rédaction de certains contenus sans perdre mon identité. Le gain de temps est colossal."</p>
+                <p class="testimonial-author">- Sophie M., Créatrice de contenu</p>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2025 Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- 1. Animation au défilement (Scroll Reveal) ---
+            const revealElements = document.querySelectorAll('.reveal');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        // On peut déconnecter l'observer pour ne jouer l'animation qu'une fois
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 // L'élément est considéré visible à 10%
+            });
+
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // L'effet de zoom au survol (anciennement "tilt effect") est maintenant géré en CSS.
+            // C'est plus simple et plus performant.
+
+            // --- 3. Auto-scrolling Carousels ---
+            function setupContinuousScroll(carousel, pixelsPerSecond = 50) {
+                // On désactive le "snap" pour permettre une animation fluide
+                carousel.style.scrollSnapType = 'none';
+                // On cache la barre de défilement qui n'est plus utile
+                carousel.style.overflowX = 'hidden';
+
+                // On ne fait rien si le contenu n'est pas assez long pour défiler
+                if (carousel.scrollWidth <= carousel.clientWidth) {
+                    return;
+                }
+
+                // On duplique le contenu pour créer une boucle parfaite
+                const items = Array.from(carousel.children);
+                items.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    clone.setAttribute('aria-hidden', 'true');
+                    carousel.appendChild(clone);
+                });
+
+                let animationFrameId;
+                
+                const scrollStep = () => {
+                    carousel.scrollLeft += pixelsPerSecond / 60; // Vitesse basée sur 60 images/seconde
+
+                    // Quand la première moitié a défilé, on repart du début sans que ça se voie
+                    if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+                        carousel.scrollLeft = 0;
+                    }
+                    animationFrameId = requestAnimationFrame(scrollStep);
+                };
+
+                const startScrolling = () => {
+                    cancelAnimationFrame(animationFrameId); // On s'assure qu'il n'y a pas plusieurs animations en même temps
+                    animationFrameId = requestAnimationFrame(scrollStep);
+                };
+
+                const stopScrolling = () => {
+                    cancelAnimationFrame(animationFrameId);
+                };
+
+                startScrolling();
+
+                // On met en pause au survol de la souris pour une meilleure expérience utilisateur
+                carousel.addEventListener('mouseenter', stopScrolling);
+                carousel.addEventListener('mouseleave', startScrolling);
+            }
+
+            const testimonialsCarousel = document.querySelector('.testimonials .carousel');
+
+            if (testimonialsCarousel) {
+                setupContinuousScroll(testimonialsCarousel, 40); // Vitesse plus lente pour les avis
+            }
+        });
+    </script>
 </body>
 </html>
