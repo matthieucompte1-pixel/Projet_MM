@@ -6,22 +6,24 @@
     <title>Ma Com/munication - Formation Hybride</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@500;700&family=Space+Grotesk:wght@500;700&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            --bg-dark: #0A0A0A;
-            --bg-light: #111111;
-            --text-primary: #F5F5F5;
-            --text-secondary: #A3A3A3;
-            --accent: #007CF0; /* Electric Blue */
-            --border-color: rgba(255, 255, 255, 0.1);
+            --bg-dark: #050608;
+            --bg-light: #101214;
+            --text-primary: #EAECEE;
+            --text-secondary: #8A9199;
+            --accent: #00F0A0; /* Emerald Green */
+            --border-color: rgba(255, 255, 255, 0.08);
 
-            --font-heading: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-title: 'Lora', serif;
             --font-body: 'Inter', sans-serif;
 
             --section-padding: 6rem;
-            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             --radius: 16px;
             --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
@@ -41,6 +43,58 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* --- PRELOADER --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-family: var(--font-heading);
+        }
+        .preloader-grid {
+            display: flex;
+            gap: 2rem;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+        .preloader-column {
+            overflow: hidden;
+            height: 2em;
+            line-height: 2em;
+        }
+        .preloader-column .numbers {
+            transform: translateY(0);
+        }
+        .preloader-column .numbers div {
+            line-height: 2em; /* Match container line-height */
+        }
+        .preloader-column-center {
+            font-family: var(--font-body); /* Use a font with a clearer ampersand */
+            font-weight: 700;
+        }
+        #launch-btn {
+            background: var(--accent);
+            color: var(--bg-dark);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -52,6 +106,7 @@
         /* --- TYPOGRAPHY --- */
         h1, h2, h3 {
             font-family: var(--font-heading);
+            font-family: var(--font-title);
             line-height: 1.2;
             color: var(--text-primary);
         }
@@ -76,7 +131,7 @@
 
         /* --- HEADER --- */
         header {
-            background: rgba(10, 10, 10, 0.75);
+            background: rgba(5, 6, 8, 0.5);
             backdrop-filter: blur(10px);
             padding: 1rem 5%;
             display: flex;
@@ -86,6 +141,20 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
         }
 
         .logo {
@@ -99,7 +168,7 @@
             position: relative;
             overflow: hidden;
             background-color: var(--accent);
-            color: var(--text-primary);
+            color: var(--bg-dark);
             padding: 0.8rem 1.5rem;
             border-radius: 50px;
             text-decoration: none;
@@ -117,52 +186,104 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
+            left: -75%;
+            width: 50%;
             height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
-            z-index: -1;
+            background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+            transform: skewX(-25deg);
+            transition: left 1s ease-in-out;
         }
 
         .cta-btn:hover::before {
-            left: 100%;
+            left: 125%;
         }
 
         .cta-btn-outline {
             background-color: transparent;
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            box-shadow: 0 0 0 0 rgba(0, 124, 240, 0.7);
+            box-shadow: 0 0 0 0 rgba(0, 240, 160, 0.7);
         }
         .cta-btn-outline:hover {
             background-color: transparent;
             border-color: var(--accent);
-            box-shadow: 0 0 20px 0 rgba(0, 124, 240, 0.5);
+            box-shadow: 0 0 20px 0 rgba(0, 240, 160, 0.5);
         }
 
         /* --- HERO SECTION --- */
         .hero {
+            position: relative;
             text-align: center;
             padding: calc(var(--section-padding) + 4rem) 5%;
             max-width: 900px;
             margin: 0 auto;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            perspective: 1000px;
+        }
+
+        .hero-widgets-container {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+        }
+
+        .widget {
+            position: absolute;
+            background: rgba(16, 18, 20, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        #widget-1 { top: 15%; left: 10%; }
+        #widget-2 { top: 25%; right: 12%; }
+        #widget-3 { bottom: 20%; left: 20%; }
+        #widget-4 { bottom: 15%; right: 25%; }
+
+        .widget-title {
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+        .widget-value {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        .widget-status .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 800;
+            position: relative;
+            z-index: 2;
         }
 
         .hero .hero-subtitle {
             font-size: 1.2rem;
             color: var(--text-secondary);
             margin: 0 auto 3rem auto;
+        }
+        
+        .hero .cta-btn {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
         }
 
         /* --- PROBLEM SECTION --- */
@@ -181,53 +302,89 @@
             color: var(--text-secondary);
         }
 
-        /* --- SOLUTION SECTION --- */
-        .solution {
+        /* --- CODE EDITOR SECTION --- */
+        .code-editor-section {
             padding: var(--section-padding) 5%;
-        }
-
-        .solution .about-container {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2.5rem;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .solution .about-card {
-            text-align: left;
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+        .code-editor-left ul {
+            list-style: none;
+            position: sticky;
+            top: 150px;
         }
 
-        .solution .about-card:hover {
-            transform: translateY(-8px);
-            background: #1a1a1a;
+        .code-editor-left li {
+            font-family: var(--font-heading);
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            cursor: default;
+            transition: color 0.3s;
+            margin-bottom: 30vh; /* Increased spacing for more scroll */
+            margin-bottom: 15vh; /* Reduced spacing */
         }
 
-        .solution .about-card .icon {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            height: 40px;
-            width: 40px;
-            transition: transform 0.3s ease;
-        }
-
-        .solution .about-card:hover .icon {
-            transform: scale(1.1) rotate(-10deg);
-        }
-
-        .solution .about-card .icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .solution .about-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        .code-editor-left li.is-active {
             color: var(--text-primary);
         }
+
+        .code-editor-right {
+            position: sticky;
+            top: 120px;
+            height: 70vh;
+        }
+
+        .editor-window {
+            background: #0D0F11;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .editor-header {
+            padding: 0.75rem;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .editor-header span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .editor-header .dot-1 { background: #FF5F56; }
+        .editor-header .dot-2 { background: #FFBD2E; }
+        .editor-header .dot-3 { background: #27C93F; }
+
+        .editor-body {
+            padding: 1.5rem;
+            font-family: 'Fira Code', monospace; /* A common coding font */
+            font-size: 0.9rem;
+            flex-grow: 1;
+            overflow: auto;
+        }
+
+        .editor-body pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .editor-body .token-key { color: #9CDCFE; }
+        .editor-body .token-string { color: #CE9178; }
+        .editor-body .token-number { color: #B5CEA8; }
+        .editor-body .token-comment { color: #6A9955; }
+        .editor-body .token-prompt { color: var(--accent); }
 
         /* --- PROGRAMME (LE PARCOURS) --- */
         .program {
@@ -363,7 +520,7 @@
 
         .ia-workshop h4 {
             color: var(--text-primary);
-            font-family: var(--font-sans);
+            font-family: var(--font-body);
             font-size: 1rem;
             display: flex;
             align-items: center;
@@ -399,7 +556,7 @@
         }
 
         .session-item h4 {
-            font-family: var(--font-sans);
+            font-family: var(--font-body);
             font-weight: 700;
             font-size: 1rem;
             color: var(--text-primary);
@@ -525,68 +682,102 @@
             align-items: center;
         }
 
-        /* --- SOCIAL PROOF --- */
-        .case-studies {
+        /* --- TESTIMONIALS --- */
+        .testimonials-section {
             padding: var(--section-padding) 5%;
+            overflow: hidden;
+        }
+
+        .marquee-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: marquee 60s linear infinite;
+        }
+
+        .marquee-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .testimonials-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .stat-item h3 {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--accent);
-        }
-
-        .stat-item p {
-            color: var(--text-secondary);
+        .marquee-wrapper .testimonials-grid {
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            max-width: none;
         }
 
         .testimonial-card {
             background: var(--bg-light);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
-            padding: 3rem;
-            animation: levitate 6s ease-in-out infinite;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes levitate {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .marquee-wrapper .testimonial-card {
+            width: 400px;
+            flex-shrink: 0;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            border: 1px solid transparent;
+            background: radial-gradient(500px circle at 50% -40%, var(--accent), transparent 55%) border-box;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .testimonial-card:hover::before {
+            opacity: 1;
         }
 
         .testimonial-text {
-            font-size: 1.2rem;
-            font-style: italic;
+            font-size: 1.1rem;
             color: var(--text-primary);
             line-height: 1.7;
-            border-left: 3px solid var(--accent);
-            padding-left: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
         .testimonial-author {
             font-weight: 700;
             color: var(--text-primary);
-            text-align: right;
         }
 
         /* --- ANIMATIONS --- */
-        .reveal {
-        }
-
-        .hero .reveal.is-visible {
-            /* Handled by GSAP */
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 240, 160, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(0, 240, 160, 0); }
         }
         
         .timeline-item.is-visible::after {
@@ -600,6 +791,32 @@
             text-align: center;
             padding: 3rem 2rem;
             font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-cta {
+            padding: var(--section-padding) 5%;
+            text-align: center;
+        }
+        .footer-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .clocks {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .clock-item .time {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        .clock-item .city {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .footer-legal {
@@ -656,22 +873,16 @@
             :root {
                 --section-padding: 4rem;
             }
-            .hero h1 { font-size: 3rem; }
+            .hero h1 { font-size: 2.5rem; }
             .hero .hero-subtitle { font-size: 1.1rem; }
             .section-title { font-size: 2rem; }
-            .solution .about-container { grid-template-columns: 1fr; }
-            .case-studies {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .stats-grid { grid-template-columns: 1fr; text-align: center; }
-            .testimonial-card { animation: none; }
-            .testimonial-text { font-size: 1.1rem; }
+            .code-editor-section { grid-template-columns: 1fr; }
+            .code-editor-right { display: none; } /* Hide complex element on mobile */
+            .testimonials-grid { grid-template-columns: 1fr; }
 
             .section-title { font-size: 1.8rem; }
             .price-card { padding: 2rem; }
             .price { font-size: 2.8rem; }
-            .lead-form { flex-direction: column; }
             .cta-btn-alt { display: none; }
         }
 
@@ -696,167 +907,86 @@
 </head>
 <body>
 
+    <div id="preloader">
+        <div class="preloader-grid">
+            <div class="preloader-column"><div class="numbers"></div></div>
+            <div class="preloader-column preloader-column-center"><div class="numbers"></div></div>
+            <div class="preloader-column"><div class="numbers"></div></div>
+        </div>
+        <button id="launch-btn">Lancer</button>
+    </div>
+
     <canvas id="bg-canvas"></canvas>
     <header>
-        <div class="logo">Ma Com<span class="highlight">/</span>munication</div>
-        <a href="#parcours" class="cta-btn cta-btn-outline">Découvrir la Méthode</a>
+        <div class="logo">PROJET MM<span class="highlight">/</span></div>
+        <nav class="nav-links">
+            <a href="#parcours">Le Parcours</a>
+            <a href="#temoignages">Témoignages</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+        <a href="#offre" class="cta-btn cta-btn-outline">Postuler</a>
     </header>
 
     <section class="hero">
-        <h1 class="hero-element">Devenez l'Évidence.</h1>
-        <p class="hero-subtitle hero-element">Votre Expertise, Amplifiée par l'IA. Arrêtez de créer du contenu. Commencez à bâtir une audience qui achète.</p>
-        <div class="hero-element"><a href="#offre" class="cta-btn">Postuler à l'Accompagnement</a></div>
+        <div class="hero-widgets-container">
+            <div class="widget" id="widget-1" data-depth="0.3">
+                <div class="widget-title">PME Growth Index</div>
+                <div class="widget-value">+34%</div>
+            </div>
+            <div class="widget" id="widget-2" data-depth="0.5">
+                <div class="widget-title">Team Engagement</div>
+                <div class="widget-value">92/100</div>
+            </div>
+            <div class="widget" id="widget-3" data-depth="0.2">
+                <div class="widget-title">Statut</div>
+                <div class="widget-value widget-status"><span class="dot"></span>Déploiement</div>
+            </div>
+            <div class="widget" id="widget-4" data-depth="0.4">
+                <div class="widget-title">Timeline</div>
+                <div class="widget-value">01 > 02 > 03 > 04</div>
+            </div>
+        </div>
+        <h1 class="hero-element">ACCOMPAGNEMENT HYBRIDE POUR PME AMBITIEUSES</h1>
+        <div class="hero-element"><a href="#parcours" class="cta-btn">DÉCOUVRIR LE PROGRAMME</a></div>
     </section>
     
-    <section class="concept">
-        <h2 class="reveal">L'IA seule est une impasse.</h2>
-        <p class="section-subtitle reveal">Vous avez testé ChatGPT. Les textes sont fades, sans âme. Votre audience le sent. <br>Cette course à la productivité vous fait perdre ce qui vous rend unique : votre voix.</p>
-    </section>
-
-    <section class="solution reveal">
-        <h2 class="section-title">Notre méthode : L'Alliance.</h2>
-        <p class="section-subtitle">La Stratégie Humaine rencontre l'Ingénierie IA.</p>
-        <div class="solution .about-container">
-            <div class="about-card">
-                <div class="icon">
-                    <!-- Icône SVG de cerveau/stratégie -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.5 21.75l-.398-1.188a3.375 3.375 0 00-2.455-2.455L12.75 18l1.188-.398a3.375 3.375 0 002.455-2.455l.398-1.188 1.188.398a3.375 3.375 0 002.455 2.455l.398 1.188-1.188.398a3.375 3.375 0 00-2.455 2.455z" /></svg>
+    <section class="code-editor-section" id="parcours">
+        <div class="code-editor-left">
+            <ul>
+                <li data-target="diagnostic">DIAGNOSTIC</li>
+                <li data-target="strategie">STRATÉGIE</li>
+                <li data-target="deploiement">DÉPLOIEMENT</li>
+                <li data-target="pilotage">PILOTAGE</li>
+            </ul>
+        </div>
+        <div class="code-editor-right">
+            <div class="editor-window">
+                <div class="editor-header">
+                    <span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>
                 </div>
-                <h3>Votre Cerveau Stratégique</h3>
-                <p>Avec Mathias, nous définissons votre message, votre ton, votre singularité. C'est le socle humain qui rend votre communication inimitable.</p>
-            </div>
-            <div class="about-card">
-                <div class="icon">
-                    <!-- Icône SVG de clone/IA -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.82m5.84-2.56a14.95 14.95 0 00-5.84-2.56m0 0a14.95 14.95 0 00-5.84 2.56m5.84-2.56V4.5a3 3 0 00-6 0v2.18m12 0v2.18a3 3 0 01-6 0v-2.18m-6 0h12" /></svg>
+                <div class="editor-body">
+                    <pre id="code-display"></pre>
                 </div>
-                <h3>Votre Clone Digital</h3>
-                <p>Nous entraînons une IA à écrire et penser comme vous. Fini le style robotique, bonjour l'authenticité à grande échelle.</p>
-            </div>
-            <div class="about-card">
-                <div class="icon">
-                    <!-- Icône SVG d'automatisation/système -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-                </div>
-                <h3>Votre Assistant Autonome</h3>
-                <p>Avec Matthieu, nous bâtissons des systèmes qui exécutent les tâches à votre place. Vous repartez avec un assistant qui travaille pour vous.</p>
             </div>
         </div>
     </section>
 
-    <section class="case-studies">
-        <div class="stats-grid">
-            <div class="stat-item reveal">
-                <h3 class="stat-number" data-target="200">0</h3>
-                <p>+ % d'engagement</p>
-            </div>
-            <div class="stat-item reveal">
-                <h3 class="stat-number" data-target="8">0</h3>
-                <p>Heures gagnées / semaine</p>
-            </div>
-        </div>
-        <div class="reveal">
-            <div class="testimonial-card">
-                <div>
-                    <p class="testimonial-text">"Je me concentre enfin sur le coaching, pas sur l'algorithme. En 30 jours, j'ai gagné 3 nouveaux clients et une clarté que je n'avais jamais eue."
-                    </p>
+    <section class="testimonials-section" id="temoignages">
+        <h2 class="section-title">Les Transformations.</h2>
+        <p class="section-subtitle">Nous ne vendons pas une formation. Nous provoquons des résultats.</p>
+        <div class="marquee-wrapper">
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Je me concentre enfin sur le coaching, pas sur l'algorithme. En 30 jours, j'ai gagné 3 nouveaux clients et une clarté que je n'avais jamais eue."</p>
                     <p class="testimonial-author">- Claire D., Coach en Nutrition</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="program" id="parcours">
-        <h2 class="section-title">Le Parcours.</h2>
-        <p class="section-subtitle">Pendant 4 semaines, nous ne vous donnons pas des leçons, nous construisons avec vous. De la Clarification de votre message à la Création de votre premier Agent IA, chaque étape est un livrable concret.</p>
-        <div class="timeline-container reveal">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">Semaine 1</div>
-                    <h3>Clarifier votre Message</h3>
-                    <p>On part sur des bases saines en identifiant vos blocages et en créant votre phrase-matrice pour définir qui vous aidez et pourquoi vous êtes le meilleur choix.</p>
-                    <div class="timeline-sessions">
-                        <div class="session-item">
-                            <h4>Séance 1.1 : Audit & Exploration (1:1)</h4>
-                            <p>On identifie vos blocages et objectifs pour partir sur des bases saines.</p>
-                        </div>
-                        <div class="session-item">
-                            <h4>Séance 1.2 : Positionnement Unique</h4>
-                            <p>Création de votre phrase-matrice pour définir qui vous aidez et pourquoi vous êtes le meilleur choix.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-livrables">
-                        <strong>Livrables :</strong> Diagnostic complet + Fiche de positionnement validée.
-                    </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"L'alliance de la stratégie humaine et de l'ingénierie IA est juste bluffante. On se sent vraiment accompagné de A à Z."</p>
+                    <p class="testimonial-author">- Julien L., Consultant Freelance</p>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">Semaine 2</div>
-                    <div class="timeline-progress-bar"></div>
-                    <h3>Structurer votre Contenu</h3>
-                    <p>Fini la page blanche. On crée votre "Boîte à idées" et on rédige vos premiers posts clés avec un feedback personnalisé.</p>
-                    <div class="timeline-sessions">
-                        <div class="session-item">
-                            <h4>Séance 2.1 : Stratégie de Contenu</h4>
-                            <p>Créez votre "Boîte à idées" (30 sujets) et votre calendrier éditorial.</p>
-                        </div>
-                        <div class="session-item">
-                            <h4>Séance 2.2 : L'Art de la Rédaction</h4>
-                            <p>Rédigez 3 posts clés (Valeur, Storytelling, Promo) et recevez un feedback vidéo personnalisé.</p>
-                        </div>
-                    </div>
-                    <div class="ia-workshop">
-                        <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1.018a7 7 0 0 0-4.79 11.566L7.5 15.25l4.79-2.666A7 7 0 0 0 7.5 1.018Zm-3.38 9.14a5.5 5.5 0 0 1 7.57-7.57l.19.19-7.95 7.95-.19-.19Z"/></svg>Atelier Ingénieur : Clonage de Style</h4>
-                        <p>On apprend à l'IA à écrire <strong>comme vous</strong>. Fini le ton robotique, vos contenus générés seront 100% authentiques.</p>
-                    </div>
-                    <div class="timeline-livrables">
-                        <strong>Livrables :</strong> 30 idées de contenus + Calendrier prérempli + 3 posts validés.
-                    </div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">Semaine 3</div>
-                    <h3>Optimiser votre Impact</h3>
-                    <p>On harmonise votre image de marque, on optimise votre bio pour convertir et on met en place une stratégie d'engagement pour créer du lien humain.</p>
-                    <div class="timeline-sessions">
-                        <div class="session-item">
-                            <h4>Séance 3.1 : Branding & Visibilité</h4>
-                            <p>Audit visuel de vos réseaux. On harmonise votre image de marque et on optimise votre bio pour convertir.</p>
-                        </div>
-                        <div class="session-item">
-                            <h4>Séance 3.2 : Engagement & Connexion</h4>
-                            <p>Apprenez à créer du lien humain avec une stratégie de messages, commentaires et storytelling.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-livrables">
-                        <strong>Livrables :</strong> Plan d'optimisation + Checklist Branding + Plan d'engagement.
-                    </div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">Semaine 4</div>
-                    <h3>Convertir votre Audience</h3>
-                    <p>On transforme les frustrations de vos clients en une offre irrésistible et on prépare votre séquence de vente douce et authentique.</p>
-                    <div class="timeline-sessions">
-                        <div class="session-item">
-                            <h4>Séance 4.1 : L'Offre Irrésistible</h4>
-                            <p>On transforme les frustrations de vos clients en une promesse forte. Structure de votre offre (Prix/Format).</p>
-                        </div>
-                        <div class="session-item">
-                            <h4>Séance 4.2 : Vendre sans forcer</h4>
-                            <p>Rédaction de posts de "vente douce" et création d'une séquence de lancement simple et authentique.</p>
-                        </div>
-                    </div>
-                    <div class="ia-workshop">
-                        <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3.5 6a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Z"/><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z"/></svg>Atelier Ingénieur : Création d'Agents</h4>
-                        <p>Nous créons (sans code) votre propre <strong>Agent IA personnel</strong>. Il vous aidera à rédiger, brainstormer et répondre à vos clients, 24h/24.</p>
-                    </div>
-                    <div class="timeline-livrables">
-                        <strong>Livrables :</strong> Fiche Offre complète + 2 posts de vente prêts + Séquence de lancement.
-                    </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Le module sur le clonage de style a changé ma vie. Je peux enfin déléguer la rédaction de certains contenus sans perdre mon identité."</p>
+                    <p class="testimonial-author">- Sophie M., Créatrice de contenu</p>
                 </div>
             </div>
         </div>
@@ -865,7 +995,7 @@
     <section class="offer" id="offre">
         <h2 class="section-title">Un Investissement, pas une Dépense.</h2>
         <div class="price-card reveal">
-            <p style="font-weight: 600; color: var(--accent);">⚠️ Places limitées à 8 personnes par cohorte.</p>
+            <p style="font-weight: 600; color: var(--accent); animation: pulse 2s infinite;">⚠️ Places limitées par cohorte.</p>
             <h3>Pack Accompagnement Complet</h3>
             <div class="price">390€ <span>TTC</span></div>
             <p style="color:var(--text-secondary); margin-bottom: 1rem;">Payable en 1 ou 3 fois sans frais</p>
@@ -914,6 +1044,24 @@
     </section>
 
     <footer>
+        <div class="footer-cta">
+            <h2>On lance votre projet ?</h2>
+            <a href="#offre" class="cta-btn">Postuler à l'Accompagnement</a>
+        </div>
+        <div class="clocks">
+            <div class="clock-item" data-timezone="Europe/Paris">
+                <div class="time">--:--:--</div>
+                <div class="city">Paris, FR</div>
+            </div>
+            <div class="clock-item" data-timezone="Asia/Dubai">
+                <div class="time">--:--:--</div>
+                <div class="city">Dubaï, AE</div>
+            </div>
+            <div class="clock-item" data-timezone="Africa/Kinshasa">
+                <div class="time">--:--:--</div>
+                <div class="city">Kinshasa, CD</div>
+            </div>
+        </div>
         <div class="footer-contact">
             <p>Une question ? <a href="mailto:contact@macommunication.fr">contact@macommunication.fr</a></p>
         </div>
@@ -921,7 +1069,7 @@
             <a href="#cgv">Conditions Générales de Vente</a> |
             <a href="#confidentialite">Politique de confidentialité</a>
         </div>
-        <p>&copy; <span id="current-year"></span> Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
+        <p>&copy; <span id="current-year"></span> PROJET MM - Mathias & Matthieu. Tous droits réservés.</p>
     </footer>
 
     <!-- 3D and Animation Libraries -->
@@ -938,82 +1086,192 @@
             const isNotTouchDevice = !('ontouchstart' in window || navigator.maxTouchPoints > 0);
             gsap.registerPlugin(ScrollTrigger);
 
-            // 1. Entry Animation
-            gsap.from(".hero-element", {
-                duration: 1,
-                y: 80,
-                opacity: 0,
-                stagger: 0.2,
-                ease: "elastic.out(1, 0.75)",
+            // --- PRELOADER ---
+            const preloader = document.getElementById('preloader');
+            const launchBtn = document.getElementById('launch-btn');
+            const columns = document.querySelectorAll('.preloader-column .numbers');
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ*<>/\\$!?#";
+            
+            // Hide body scrollbar during preloader
+            document.body.style.overflow = 'hidden';
+
+            columns.forEach((column, colIndex) => {
+                const targetChar = colIndex === 1 ? '&' : 'M';
+                let content = '';
+                for (let i = 0; i < 50; i++) {
+                    const char = i === 49 ? targetChar : chars[Math.floor(Math.random() * chars.length)];
+                    content += `<div>${char}</div>`;
+                }
+                column.innerHTML = content;
+            });
+
+            const tlLoader = gsap.timeline();
+            tlLoader.to(columns, {
+                transform: 'translateY(-98em)', // 49 items * 2em line-height
+                duration: 3,
+                ease: 'power3.inOut',
+                stagger: 0.2
+            }).to(launchBtn, {
+                opacity: 1,
+                y: 0,
+                ease: 'power2.out',
                 delay: 0.5
             });
 
-            // 2. Scroll-reveal for sections
-            const revealElements = document.querySelectorAll('.reveal');
-            revealElements.forEach(el => {
-                gsap.from(el, {
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 85%",
-                        toggleActions: "play none none none"
-                    },
+            launchBtn.addEventListener('click', () => {
+                gsap.to(preloader, {
                     opacity: 0,
-                    y: 50,
-                    duration: 1,
-                    ease: "power3.out"
-                });
-            });
-
-            // 3. Stats counter animation
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(el => {
-                const target = +el.dataset.target;
-                gsap.from(el, {
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 90%",
-                        toggleActions: "play none none none"
-                    },
-                    textContent: 0,
-                    duration: 2,
-                    ease: "power2.out",
-                    snap: { textContent: 1 }
-                });
-            });
-
-            // 4. Timeline progress bar
-            const timeline = document.querySelector('.timeline-container');
-            if (timeline) {
-                gsap.to(".timeline-progress-bar", {
-                    height: "100%",
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: ".timeline-container",
-                        start: "top top",
-                        end: "bottom bottom",
-                        scrub: true
+                    duration: 0.8,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                        document.body.style.overflow = '';
+                        preloader.style.display = 'none';
+                        // CRITICAL: Wait for the browser to reflow the layout before starting animations
+                        setTimeout(initPageAnimations, 100);
                     }
                 });
-            }
-
-            // 5. Timeline items slide-in
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            timelineItems.forEach(item => {
-                const isOdd = Array.from(item.parentNode.children).indexOf(item) % 2 === 0;
-                gsap.from(item.querySelector('.timeline-content'), {
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 70%",
-                        toggleActions: "play none none none"
-                    },
-                    x: isOdd ? -100 : 100,
-                    opacity: 0,
-                    duration: 1,
-                    ease: "power3.out"
-                });
             });
 
-            // 6. Pricing card spotlight effect
+            function initPageAnimations() {
+                // 1. Entry Animation
+                gsap.from(".hero-element", {
+                    duration: 1,
+                    y: 80,
+                    opacity: 0,
+                    stagger: 0.2,
+                    ease: "elastic.out(1, 0.75)",
+                    delay: 0.2
+                });
+
+                // 2. Scroll-reveal for sections
+                const revealElements = document.querySelectorAll('.reveal');
+                revealElements.forEach(el => {
+                    gsap.from(el, {
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 1,
+                        ease: "power3.out"
+                    });
+                });
+
+                // 3. Code Editor Section Logic
+            const codeContent = {
+                diagnostic: `{
+    <span class="token-key">"phase"</span>: <span class="token-string">"Diagnostic"</span>,
+    <span class="token-key">"objectif"</span>: <span class="token-string">"Identifier blocages et opportunités"</span>,
+    <span class="token-key">"livrables"</span>: [
+        <span class="token-string">"Audit 360°"</span>,
+        <span class="token-string">"Fiche de positionnement"</span>
+    ]
+}`,
+                strategie: `{
+    <span class="token-key">"phase"</span>: <span class="token-string">"Stratégie"</span>,
+    <span class="token-key">"action"</span>: <span class="token-string">"Définir la feuille de route"</span>,
+    <span class="token-key">"modules"</span>: [
+        <span class="token-string">"Stratégie de Contenu"</span>,
+        <span class="token-string">"Clonage de Style IA"</span>
+    ]
+}`,
+                deploiement: `<span class="token-prompt">$</span> npm run start --strategy deployment
+<span class="token-comment">// Initialisation des systèmes automatisés...</span>
+<span class="token-comment">// Déploiement des agents IA...</span>
+<span class="token-comment">// Statut : Opérationnel</span>`,
+                pilotage: `{
+    <span class="token-key">"phase"</span>: <span class="token-string">"Pilotage"</span>,
+    <span class="token-key">"focus"</span>: <span class="token-string">"Analyse des KPIs et itération"</span>,
+    <span class="token-key">"reporting_frequency"</span>: <span class="token-number">7</span> <span class="token-comment">// jours</span>
+}`
+            };
+            const codeDisplay = document.getElementById('code-display');
+            const steps = document.querySelectorAll('.code-editor-left li');
+            
+            steps.forEach(step => {
+                ScrollTrigger.create({
+                    trigger: step,
+                    start: 'top center',
+                    end: 'bottom center',
+                    onEnter: () => {
+                        steps.forEach(s => s.classList.remove('is-active'));
+                        step.classList.add('is-active');
+                        codeDisplay.innerHTML = codeContent[step.dataset.target];
+                    },
+                    onEnterBack: () => {
+                        steps.forEach(s => s.classList.remove('is-active'));
+                        step.classList.add('is-active');
+                        codeDisplay.innerHTML = codeContent[step.dataset.target];
+                    }
+                });
+            });
+            // Set initial state
+            if (steps.length > 0) {
+                codeDisplay.innerHTML = codeContent[steps[0].dataset.target];
+                steps[0].classList.add('is-active');
+                const codeContent = {
+                    diagnostic: `{
+        <span class="token-key">"phase"</span>: <span class="token-string">"Diagnostic"</span>,
+        <span class="token-key">"objectif"</span>: <span class="token-string">"Identifier blocages et opportunités"</span>,
+        <span class="token-key">"livrables"</span>: [
+            <span class="token-string">"Audit 360°"</span>,
+            <span class="token-string">"Fiche de positionnement"</span>
+        ]
+    }`,
+                    strategie: `{
+        <span class="token-key">"phase"</span>: <span class="token-string">"Stratégie"</span>,
+        <span class="token-key">"action"</span>: <span class="token-string">"Définir la feuille de route"</span>,
+        <span class="token-key">"modules"</span>: [
+            <span class="token-string">"Stratégie de Contenu"</span>,
+            <span class="token-string">"Clonage de Style IA"</span>
+        ]
+    }`,
+                    deploiement: `<span class="token-prompt">$</span> npm run start --strategy deployment
+    <span class="token-comment">// Initialisation des systèmes automatisés...</span>
+    <span class="token-comment">// Déploiement des agents IA...</span>
+    <span class="token-comment">// Statut : Opérationnel</span>`,
+                    pilotage: `{
+        <span class="token-key">"phase"</span>: <span class="token-string">"Pilotage"</span>,
+        <span class="token-key">"focus"</span>: <span class="token-string">"Analyse des KPIs et itération"</span>,
+        <span class="token-key">"reporting_frequency"</span>: <span class="token-number">7</span> <span class="token-comment">// jours</span>
+    }`
+                };
+                const codeDisplay = document.getElementById('code-display');
+                const steps = document.querySelectorAll('.code-editor-left li');
+                const codeSection = document.querySelector('.code-editor-section');
+
+                if (codeSection && steps.length > 0) {
+                    ScrollTrigger.create({
+                        trigger: codeSection,
+                        pin: true,
+                        start: "top top",
+                        end: `+=${codeSection.offsetHeight}`,
+                    });
+
+                    steps.forEach(step => {
+                        ScrollTrigger.create({
+                            trigger: step,
+                            start: 'top center',
+                            end: 'bottom center',
+                            onToggle: self => {
+                                if (self.isActive) {
+                                    steps.forEach(s => s.classList.remove('is-active'));
+                                    step.classList.add('is-active');
+                                    codeDisplay.innerHTML = codeContent[step.dataset.target];
+                                }
+                            }
+                        });
+                    });
+
+                    steps[0].classList.add('is-active');
+                    codeDisplay.innerHTML = codeContent[steps[0].dataset.target];
+                }
+
+            }
+
+                // 4. Pricing card spotlight effect
             const priceCard = document.querySelector('.price-card');
             if (priceCard) {
                 priceCard.addEventListener('mousemove', (e) => {
@@ -1025,50 +1283,48 @@
                 });
             }
 
-            // 7. Three.js Background
-            if (typeof THREE !== 'undefined' && isNotTouchDevice) {
-                const scene = new THREE.Scene();
-                const geometry = new THREE.TorusKnotGeometry(0.8, 0.25, 128, 16);
-                const material = new THREE.MeshBasicMaterial({ color: 0x007CF0, wireframe: true });
-                const mesh = new THREE.Mesh(geometry, material);
-                scene.add(mesh);
-                const sizes = { width: window.innerWidth, height: window.innerHeight };
-                const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
-                camera.position.z = 3.5;
-                scene.add(camera);
-                const canvas = document.querySelector('#bg-canvas');
-                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
-                renderer.setSize(sizes.width, sizes.height);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                window.addEventListener('resize', () => {
-                    sizes.width = window.innerWidth;
-                    sizes.height = window.innerHeight;
-                    camera.aspect = sizes.width / sizes.height;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(sizes.width, sizes.height);
-                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                // 5. Clocks
+            const clockItems = document.querySelectorAll('.clock-item');
+            function updateClocks() {
+                clockItems.forEach(item => {
+                    const timezone = item.dataset.timezone;
+                    const time = new Date().toLocaleTimeString('fr-FR', { timeZone: timezone, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                    item.querySelector('.time').textContent = time;
                 });
-                let mouseX = 0;
-                let mouseY = 0;
-                window.addEventListener('mousemove', (event) => {
-                    mouseX = (event.clientX / sizes.width) - 0.5;
-                    mouseY = (event.clientY / sizes.height) - 0.5;
+            }
+            updateClocks();
+            setInterval(updateClocks, 1000);
+
+                // 6. Hero Widgets Parallax
+            const widgets = document.querySelectorAll('.widget');
+            if (isNotTouchDevice) {
+                document.querySelector('.hero').addEventListener('mousemove', (e) => {
+                    const { clientX, clientY } = e;
+                    const x = (clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+                    const y = (clientY / window.innerHeight - 0.5) * 2; // -1 to 1
+
+                    widgets.forEach(widget => {
+                        const depth = widget.dataset.depth || 0.5;
+                        const moveX = x * -30 * depth;
+                        const moveY = y * -30 * depth;
+                        gsap.to(widget, {
+                            x: moveX,
+                            y: moveY,
+                            duration: 0.8,
+                            ease: 'power3.out'
+                        });
+                    });
                 });
-                const clock = new THREE.Clock();
-                let smoothedMouseX = 0;
-                let smoothedMouseY = 0;
-                const tick = () => {
-                    const elapsedTime = clock.getElapsedTime();
-                    smoothedMouseX += (mouseX - smoothedMouseX) * 0.05;
-                    smoothedMouseY += (mouseY - smoothedMouseY) * 0.05;
-                    mesh.rotation.y = 0.1 * elapsedTime + smoothedMouseX * 0.5;
-                    mesh.rotation.x = 0.08 * elapsedTime - smoothedMouseY * 0.5;
-                    renderer.render(scene, camera);
-                    window.requestAnimationFrame(tick);
-                };
-                tick();
             }
 
+                // 7. Testimonial Marquee Duplication
+                const grid = document.querySelector('.testimonials-grid');
+                if (grid) {
+                    const clone = grid.cloneNode(true);
+                    clone.setAttribute('aria-hidden', 'true');
+                    grid.parentElement.appendChild(clone);
+                }
+        }
         });
     </script>
 </body>
