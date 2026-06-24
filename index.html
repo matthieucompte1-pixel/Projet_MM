@@ -24,7 +24,7 @@
 
             --section-padding: 6rem;
             --shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
-            --radius: 8px;
+            --radius: 24px; /* Plus de rondeur */
             --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -41,6 +41,38 @@
             font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+
+        #intro-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 800px;
+        }
+
+        #intro-box {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            padding: 2rem 4rem;
+            border: 2px solid var(--accent);
+            border-radius: var(--radius);
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            outline: none;
+            z-index: -1;
         }
 
         /* --- TYPOGRAPHY --- */
@@ -80,6 +112,7 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(244, 244, 244, 0.1);
+            transition: opacity 0.5s ease;
         }
 
         .logo {
@@ -104,6 +137,7 @@
             background-color: var(--accent-hover);
             border-color: var(--accent-hover);
             transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(212, 175, 55, 0.2);
         }
 
         .cta-btn-outline {
@@ -126,6 +160,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            transition: opacity 0.5s ease;
         }
 
         .hero h1 {
@@ -202,9 +237,21 @@
         }
 
         .solution .about-card .icon {
-            font-size: 2rem;
             color: var(--accent);
             margin-bottom: 1rem;
+            height: 40px;
+            width: 40px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.5); /* Added bounce */
+        }
+
+        .solution .about-card:hover .icon {
+            transform: scale(1.15) rotate(-8deg);
+        }
+
+        .solution .about-card .icon svg {
+            width: 100%;
+            height: 100%;
+            stroke-width: 1.5;
         }
 
         .solution .about-card h3 {
@@ -213,7 +260,7 @@
         }
 
         .about-card p {
-            color: var(--text-dark);
+            color: #555;
         }
 
         /* --- PROGRAMME (LE PARCOURS) --- */
@@ -230,125 +277,134 @@
         }
         .program .section-subtitle { color: #555; }
 
-        /* --- OLD MODULE CARD --- */
-        .module-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-            border-left: 5px solid var(--primary);
-            transition: var(--transition-smooth);
-        }
-
-        /* --- OLD MODULE HEADER --- */
-        .module-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 1rem;
-        }
-
-        /* --- OLD MODULE ICON --- */
-        .module-header-icon {
-            flex-shrink: 0;
-            background-color: var(--bg-light);
-            border: 1px solid #e2e8f0;
-            color: var(--primary);
-            padding: 0.75rem;
-            border-radius: var(--radius);
-        }
-
-        .module-header-icon svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* --- OLD MODULE NUMBER --- */
-        .module-number {
-            background: var(--primary);
-            color: var(--white);
-            padding: 0.2rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
-        /* --- OLD MODULE TITLE --- */
-        .module-title {
-            font-size: 1.5rem;
-        }
-
-        /* --- OLD SESSION --- */
-        .session {
-            margin-bottom: 1.5rem;
-        }
-
-        .session-title {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .session-title::before {
-            content: "•";
-            color: var(--accent);
-            font-size: 2rem;
-            line-height: 0;
-            margin-right: 10px;
-        }
-
-        /* --- OLD LIVRABLES --- */
-        .livrables {
-            background: #f0fdf4; /* Light green bg */
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            border: 1px solid #bbf7d0;
-        }
-
-        /* --- IA CAPSULE STYLE --- */
-        /* This style is being retired for a more integrated look */
-        .ia-capsule {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: var(--white);
-            border-radius: var(--radius);
-            padding: 2rem;
-            margin: 3rem 0;
-            border: 2px solid var(--accent);
+        /* --- TIMELINE --- */
+        .timeline-container {
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px -10px rgba(16, 109, 185, 0.3);
+            padding: 2rem 0;
+            margin-top: 2rem;
+            perspective: 1000px; /* Added for 3D effect */
         }
 
-        .ia-capsule h3 {
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .ia-capsule::after {
-            content: "NIVEAU INGÉNIEUR";
+        .timeline-container::before {
+            content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            font-size: 0.75rem;
-            background: var(--accent);
-            color: var(--primary);
-            padding: 5px 12px;
-            border-bottom-left-radius: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #e2e8f0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 50%;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            border: 4px solid var(--accent);
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -11px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -11px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .timeline-content li {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .timeline-content li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
             font-weight: bold;
-            letter-spacing: 1px;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .ia-workshop {
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .ia-workshop h4 {
+            color: var(--accent);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ia-workshop p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0.5rem;
         }
 
         /* --- TOOLS SECTION --- */
@@ -356,6 +412,9 @@
         .tools-section {
             padding: var(--section-padding) 5%;
             background: var(--bg-light);
+        .timeline-sessions {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .tools-subtitle {
@@ -363,6 +422,10 @@
             max-width: 600px;
             margin: -2rem auto 3rem auto;
             color: var(--text-dark);
+        .session-item {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .tools-grid {
@@ -371,6 +434,15 @@
             gap: 1.5rem;
             max-width: 1000px;
             margin: 0 auto;
+        .session-item::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1;
         }
 
         .tool-card {
@@ -381,14 +453,34 @@
             text-align: center;
             transition: var(--transition-smooth);
             border-top: 4px solid var(--primary);
+        .session-item h4 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-on-secondary);
+            margin-bottom: 0.25rem;
         }
 
         .tool-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        .session-item p {
+            font-size: 0.9rem;
+            margin: 0;
         }
 
         .tool-name {
+        .timeline-livrables {
+            background: #f8fafc;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .timeline-livrables strong {
+            color: var(--accent);
             font-weight: 700;
             font-size: 1.2rem;
             color: var(--primary);
@@ -591,7 +683,7 @@
 
         .faq-item {
             background: var(--white);
-            border-radius: 8px;
+            border-radius: var(--radius);
             margin-bottom: 1rem;
             border: 1px solid #e2e8f0;
         }
@@ -682,13 +774,22 @@
         /* --- ANIMATIONS --- */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
-        .price-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+        .hero .reveal.is-visible {
+            transition: transform 0.1s linear;
+        }
+
+        .timeline-content:hover,
+        .price-card:hover,
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item.is-visible::after {
+            transform: scale(1.2);
         }
 
         /* --- FOOTER --- */
@@ -775,10 +876,30 @@
             .cta-btn-alt { display: none; }
             .audit-section { margin: var(--section-padding) 5%; padding: 3rem 1.5rem; }
         }
+
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 9px;
+                transform: translateX(0);
+            }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                left: 0;
+                padding-left: 3rem;
+                padding-right: 0;
+            }
+            .timeline-item::after,
+            .timeline-item:nth-child(even)::after {
+                left: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <div id="intro-container"><div id="intro-box">Ma Com<span>/</span>munication</div></div>
+    <canvas id="bg-canvas"></canvas>
     <header>
         <div class="logo">Ma Com<span class="highlight">/</span>munication</div>
         <a href="#parcours" class="cta-btn cta-btn-outline">Découvrir la Méthode</a>
@@ -800,19 +921,28 @@
         <p class="section-subtitle">La Stratégie Humaine rencontre l'Ingénierie IA.</p>
         <div class="concept-container">
             <div class="about-card">
-                <div class="icon">🧠</div>
+                <div class="icon">
+                    <!-- Icône SVG de cerveau/stratégie -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.5 21.75l-.398-1.188a3.375 3.375 0 00-2.455-2.455L12.75 18l1.188-.398a3.375 3.375 0 002.455-2.455l.398-1.188 1.188.398a3.375 3.375 0 002.455 2.455l.398 1.188-1.188.398a3.375 3.375 0 00-2.455 2.455z" /></svg>
+                </div>
                 <h3>Votre Cerveau Stratégique</h3>
-                <p>On définit votre message, votre ton, votre singularité. C'est le socle humain qui rend votre communication inimitable.</p>
+                <p>Avec Mathias, nous définissons votre message, votre ton, votre singularité. C'est le socle humain qui rend votre communication inimitable.</p>
             </div>
             <div class="about-card">
-                <div class="icon">🤖</div>
+                <div class="icon">
+                    <!-- Icône SVG de clone/IA -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.82m5.84-2.56a14.95 14.95 0 00-5.84-2.56m0 0a14.95 14.95 0 00-5.84 2.56m5.84-2.56V4.5a3 3 0 00-6 0v2.18m12 0v2.18a3 3 0 01-6 0v-2.18m-6 0h12" /></svg>
+                </div>
                 <h3>Votre Clone Digital</h3>
-                <p>On entraîne une IA à écrire et penser comme vous. Fini le style robotique, bonjour l'authenticité à grande échelle.</p>
+                <p>Nous entraînons une IA à écrire et penser comme vous. Fini le style robotique, bonjour l'authenticité à grande échelle.</p>
             </div>
             <div class="about-card">
-                <div class="icon">⚡️</div>
+                <div class="icon">
+                    <!-- Icône SVG d'automatisation/système -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                </div>
                 <h3>Votre Assistant Autonome</h3>
-                <p>On bâtit des systèmes qui exécutent les tâches à votre place. Vous ne repartez pas avec des notes, mais avec un assistant qui travaille pour vous.</p>
+                <p>Avec Matthieu, nous bâtissons des systèmes qui exécutent les tâches à votre place. Vous repartez avec un assistant qui travaille pour vous.</p>
             </div>
         </div>
     </section>
@@ -839,7 +969,103 @@
     <section class="program" id="parcours">
         <h2 class="section-title">Le Parcours.</h2>
         <p class="section-subtitle">Pendant 4 semaines, nous ne vous donnons pas des leçons, nous construisons avec vous. De la Clarification de votre message à la Création de votre premier Agent IA, chaque étape est un livrable concret.</p>
-        <!-- Le contenu détaillé du programme peut être ajouté ici, par exemple dans des <details> pour un look épuré -->
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Semaine 1</div>
+                    <h3>Clarifier votre Message</h3>
+                    <p>On identifie vos blocages et on crée votre phrase-matrice pour définir qui vous aidez et pourquoi vous êtes le meilleur choix.</p>
+                    <ul>
+                        <li>Séance 1.1 : Audit & Exploration (1:1)</li>
+                        <li>Séance 1.2 : Positionnement Unique</li>
+                    </ul>
+                    <p>On part sur des bases saines en identifiant vos blocages et en créant votre phrase-matrice pour définir qui vous aidez et pourquoi vous êtes le meilleur choix.</p>
+                    <div class="timeline-sessions">
+                        <div class="session-item">
+                            <h4>Séance 1.1 : Audit & Exploration (1:1)</h4>
+                            <p>On identifie vos blocages et objectifs pour partir sur des bases saines.</p>
+                        </div>
+                        <div class="session-item">
+                            <h4>Séance 1.2 : Positionnement Unique</h4>
+                            <p>Création de votre phrase-matrice pour définir qui vous aidez et pourquoi vous êtes le meilleur choix.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-livrables">
+                        <strong>Livrables :</strong> Diagnostic complet + Fiche de positionnement validée.
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Semaine 2</div>
+                    <h3>Structurer votre Contenu</h3>
+                    <p>Fini la page blanche. On crée votre "Boîte à idées" et on rédige vos premiers posts clés avec un feedback personnalisé.</p>
+                    <div class="timeline-sessions">
+                        <div class="session-item">
+                            <h4>Séance 2.1 : Stratégie de Contenu</h4>
+                            <p>Créez votre "Boîte à idées" (30 sujets) et votre calendrier éditorial.</p>
+                        </div>
+                        <div class="session-item">
+                            <h4>Séance 2.2 : L'Art de la Rédaction</h4>
+                            <p>Rédigez 3 posts clés (Valeur, Storytelling, Promo) et recevez un feedback vidéo personnalisé.</p>
+                        </div>
+                    </div>
+                    <div class="ia-workshop">
+                        <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1.018a7 7 0 0 0-4.79 11.566L7.5 15.25l4.79-2.666A7 7 0 0 0 7.5 1.018Zm-3.38 9.14a5.5 5.5 0 0 1 7.57-7.57l.19.19-7.95 7.95-.19-.19Z"/></svg>Atelier Ingénieur : Clonage de Style</h4>
+                        <p>On apprend à l'IA à écrire <strong>comme vous</strong>. Fini le ton robotique, vos contenus générés seront 100% authentiques.</p>
+                    </div>
+                    <div class="timeline-livrables">
+                        <strong>Livrables :</strong> 30 idées de contenus + Calendrier prérempli + 3 posts validés.
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Semaine 3</div>
+                    <h3>Optimiser votre Impact</h3>
+                    <p>On harmonise votre image de marque et on met en place une stratégie d'engagement pour créer du lien humain.</p>
+                    <p>On harmonise votre image de marque, on optimise votre bio pour convertir et on met en place une stratégie d'engagement pour créer du lien humain.</p>
+                    <div class="timeline-sessions">
+                        <div class="session-item">
+                            <h4>Séance 3.1 : Branding & Visibilité</h4>
+                            <p>Audit visuel de vos réseaux. On harmonise votre image de marque et on optimise votre bio pour convertir.</p>
+                        </div>
+                        <div class="session-item">
+                            <h4>Séance 3.2 : Engagement & Connexion</h4>
+                            <p>Apprenez à créer du lien humain avec une stratégie de messages, commentaires et storytelling.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-livrables">
+                        <strong>Livrables :</strong> Plan d'optimisation + Checklist Branding + Plan d'engagement.
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Semaine 4</div>
+                    <h3>Convertir votre Audience</h3>
+                    <p>On transforme les frustrations de vos clients en une offre irrésistible et on prépare votre séquence de vente douce.</p>
+                    <p>On transforme les frustrations de vos clients en une offre irrésistible et on prépare votre séquence de vente douce et authentique.</p>
+                    <div class="timeline-sessions">
+                        <div class="session-item">
+                            <h4>Séance 4.1 : L'Offre Irrésistible</h4>
+                            <p>On transforme les frustrations de vos clients en une promesse forte. Structure de votre offre (Prix/Format).</p>
+                        </div>
+                        <div class="session-item">
+                            <h4>Séance 4.2 : Vendre sans forcer</h4>
+                            <p>Rédaction de posts de "vente douce" et création d'une séquence de lancement simple et authentique.</p>
+                        </div>
+                    </div>
+                    <div class="ia-workshop">
+                        <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3.5 6a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Z"/><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2Z"/></svg>Atelier Ingénieur : Création d'Agents</h4>
+                        <p>Nous créons (sans code) votre propre <strong>Agent IA personnel</strong>. Il vous aidera à rédiger, brainstormer et répondre à vos clients, 24h/24.</p>
+                    </div>
+                    <div class="timeline-livrables">
+                        <strong>Livrables :</strong> Fiche Offre complète + 2 posts de vente prêts + Séquence de lancement.
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="offer" id="offre">
@@ -904,6 +1130,11 @@
         <p>&copy; <span id="current-year"></span> Ma Com/munication - Mathias & Matthieu. Tous droits réservés.</p>
     </footer>
 
+    <!-- 3D and Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.164.1/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
     <!-- Emplacement pour le script du chat en direct (ex: Crisp, Tawk.to) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -911,25 +1142,152 @@
             // --- Dynamic Year in Footer ---
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // --- 1. Animation au défilement (Scroll Reveal) ---
-            const revealElements = document.querySelectorAll('.reveal');
+            // On vérifie qu'on est sur un appareil qui n'est pas tactile pour éviter les soucis sur mobile/tablette
+            const isNotTouchDevice = !('ontouchstart' in window || navigator.maxTouchPoints > 0);
+            const introContainer = document.getElementById('intro-container');
+            const mainHeader = document.querySelector('header');
+            const mainHero = document.querySelector('.hero');
+            const body = document.body;
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        // On peut déconnecter l'observer pour ne jouer l'animation qu'une fois
-                        observer.unobserve(entry.target);
+            function initializePageAnimations() {
+                // --- 1. Animation au défilement (Scroll Reveal) ---
+                const revealElements = document.querySelectorAll('.reveal');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            entry.target.style.opacity = '1'; // Simple fade-in
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                revealElements.forEach(el => observer.observe(el));
+
+                // --- 2. Parallax on Hero Section ---
+                const hero = document.querySelector('.hero');
+                if (hero && isNotTouchDevice) {
+                    const heroTitle = hero.querySelector('h1');
+                    const heroSubtitle = hero.querySelector('.hero-subtitle');
+                    const heroCta = hero.querySelector('.cta-btn');
+                    hero.addEventListener('mousemove', function(e) {
+                        const { clientX, clientY } = e;
+                        const { offsetWidth, offsetHeight } = hero;
+                        const xPos = (clientX / offsetWidth - 0.5) * 2;
+                        const yPos = (clientY / offsetHeight - 0.5) * 2;
+                        const titleStrength = 15;
+                        const subtitleStrength = 10;
+                        const ctaStrength = 5;
+                        heroTitle.style.transform = `translate(${xPos * -titleStrength}px, ${yPos * -titleStrength}px)`;
+                        heroSubtitle.style.transform = `translate(${xPos * -subtitleStrength}px, ${yPos * -subtitleStrength}px)`;
+                        heroCta.style.transform = `translate(${xPos * -ctaStrength}px, ${yPos * -ctaStrength}px)`;
+                    });
+                }
+
+                // --- 3. GSAP 3D Timeline Animation ---
+                if (typeof gsap !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+                    document.querySelectorAll('.timeline-item').forEach(item => {
+                        const content = item.querySelector('.timeline-content');
+                        const isOdd = Array.from(item.parentNode.children).indexOf(item) % 2 === 0;
+                        gsap.from(content, {
+                            scrollTrigger: {
+                                trigger: item,
+                                start: "top 80%",
+                                toggleActions: "play none none none",
+                            },
+                            opacity: 0,
+                            x: isOdd ? -100 : 100,
+                            rotationY: isOdd ? 45 : -45,
+                            duration: 1.2,
+                            ease: "power3.out",
+                        });
+                    });
+                }
+
+                // --- 4. Three.js Background Animation ---
+                if (typeof THREE !== 'undefined' && isNotTouchDevice) {
+                    const scene = new THREE.Scene();
+                    const geometry = new THREE.TorusKnotGeometry(0.8, 0.25, 128, 16);
+                    const material = new THREE.MeshBasicMaterial({ color: 0xD4AF37, wireframe: true });
+                    const mesh = new THREE.Mesh(geometry, material);
+                    scene.add(mesh);
+                    const sizes = { width: window.innerWidth, height: window.innerHeight };
+                    const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
+                    camera.position.z = 3.5;
+                    scene.add(camera);
+                    const canvas = document.querySelector('#bg-canvas');
+                    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                    renderer.setSize(sizes.width, sizes.height);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                    window.addEventListener('resize', () => {
+                        sizes.width = window.innerWidth;
+                        sizes.height = window.innerHeight;
+                        camera.aspect = sizes.width / sizes.height;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(sizes.width, sizes.height);
+                        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                    });
+                    let mouseX = 0;
+                    let mouseY = 0;
+                    window.addEventListener('mousemove', (event) => {
+                        mouseX = (event.clientX / sizes.width) - 0.5;
+                        mouseY = (event.clientY / sizes.height) - 0.5;
+                    });
+                    const clock = new THREE.Clock();
+                    let smoothedMouseX = 0;
+                    let smoothedMouseY = 0;
+                    const tick = () => {
+                        const elapsedTime = clock.getElapsedTime();
+                        smoothedMouseX += (mouseX - smoothedMouseX) * 0.05;
+                        smoothedMouseY += (mouseY - smoothedMouseY) * 0.05;
+                        mesh.rotation.y = 0.1 * elapsedTime + smoothedMouseX * 0.5;
+                        mesh.rotation.x = 0.08 * elapsedTime - smoothedMouseY * 0.5;
+                        renderer.render(scene, camera);
+                        window.requestAnimationFrame(tick);
+                    };
+                    tick();
+                }
+            }
+
+            if (introContainer && typeof gsap !== 'undefined') {
+                // Hide main content and disable scroll
+                body.style.overflow = 'hidden';
+                gsap.set([mainHeader, mainHero], { opacity: 0 });
+
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        body.style.overflow = '';
+                        introContainer.remove();
+                        initializePageAnimations(); 
                     }
                 });
-            }, {
-                threshold: 0.1 // L'élément est considéré visible à 10%
-            });
 
-            revealElements.forEach(el => {
-                observer.observe(el);
-            });
+                tl.from("#intro-box", {
+                    duration: 1.2,
+                    scale: 0.2,
+                    rotationX: -90,
+                    opacity: 0,
+                    ease: "power3.out"
+                }, 0.5)
+                .to("#intro-box", {
+                    duration: 1,
+                    y: "-150vh",
+                    rotationZ: 45,
+                    ease: "power2.in"
+                }, "+=1.5")
+                .to(introContainer, {
+                    duration: 0.8,
+                    opacity: 0,
+                }, "-=0.8")
+                .to([mainHeader, mainHero], {
+                    duration: 1,
+                    opacity: 1,
+                    ease: "power2.out"
+                }, "-=0.5");
+            } else {
+                // If no intro, just run the animations
+                initializePageAnimations();
+            }
         });
     </script>
 </body>
