@@ -179,23 +179,9 @@
         }
 
         .cta-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -75%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
-            transform: skewX(-25deg);
-            transition: left 1s ease-in-out;
-        }
-
-        .cta-btn:hover::before {
-            left: 125%;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 240, 160, 0.2),
+                        0 0 30px rgba(0, 240, 160, 0.4);
         }
 
         .cta-btn-outline {
@@ -242,7 +228,7 @@
         }
 
         #widget-1 { top: 15%; left: 10%; }
-        #widget-2 { top: 25%; right: 12%; }
+        #widget-2 { top: 20%; right: 5%; }
         #widget-3 { bottom: 20%; left: 20%; }
         #widget-4 { bottom: 15%; right: 25%; }
 
@@ -286,6 +272,11 @@
             display: inline-block;
         }
 
+        .hero-content {
+            transform-style: preserve-3d;
+            /* This container is used for the 3D tilt effect on mouse move */
+        }
+
         /* --- PROBLEM SECTION --- */
         .concept {
             padding: var(--section-padding) 5%;
@@ -316,6 +307,7 @@
             list-style: none;
             position: sticky;
             top: 150px;
+            padding-bottom: 40vh; /* Espace pour laisser le dernier élément visible */
         }
 
         .code-editor-left li {
@@ -326,8 +318,28 @@
             color: var(--text-secondary);
             cursor: default;
             transition: color 0.3s;
-            margin-bottom: 30vh; /* Increased spacing for more scroll */
-            margin-bottom: 15vh; /* Reduced spacing */
+            margin-bottom: 25vh; /* Spacing for scroll */
+            position: relative;
+        }
+
+        .code-editor-left li::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), white 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            border-radius: 12px;
+            mix-blend-mode: screen;
+        }
+        .code-editor-left li:hover::before {
+            opacity: 0.15;
+        }
+        .code-editor-left li:last-child {
+            margin-bottom: 0;
         }
 
         .code-editor-left li.is-active {
@@ -348,6 +360,24 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            position: relative; /* For the spotlight effect */
+        }
+
+        .editor-window::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .editor-window:hover::after {
+            opacity: 1;
         }
 
         .editor-header {
@@ -369,22 +399,61 @@
 
         .editor-body {
             padding: 1.5rem;
-            font-family: 'Fira Code', monospace; /* A common coding font */
+            font-family: var(--font-body);
             font-size: 0.9rem;
             flex-grow: 1;
             overflow: auto;
         }
 
-        .editor-body pre {
-            margin: 0;
-            white-space: pre-wrap;
+        .phase-content .phase-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
         }
 
-        .editor-body .token-key { color: #9CDCFE; }
-        .editor-body .token-string { color: #CE9178; }
-        .editor-body .token-number { color: #B5CEA8; }
-        .editor-body .token-comment { color: #6A9955; }
-        .editor-body .token-prompt { color: var(--accent); }
+        .phase-content .phase-title::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 1.5rem;
+            background-color: var(--accent);
+            margin-right: 0.75rem;
+        }
+
+        .phase-content .phase-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .phase-content .phase-deliverables-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .phase-content .phase-deliverables li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .phase-content .phase-deliverables li::before {
+            content: '✓';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
 
         /* --- PROGRAMME (LE PARCOURS) --- */
         .program {
@@ -669,6 +738,25 @@
             border-radius: var(--radius);
             margin-bottom: 1rem;
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .faq-item:hover::after {
+            opacity: 1;
         }
 
         .faq-item summary {
@@ -692,7 +780,7 @@
             display: flex;
             gap: 1.5rem;
             width: max-content;
-            animation: marquee 60s linear infinite;
+            animation: marquee 120s linear infinite;
         }
 
         .marquee-wrapper:hover {
@@ -731,6 +819,7 @@
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .marquee-wrapper .testimonial-card {
@@ -738,9 +827,7 @@
             flex-shrink: 0;
         }
 
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-        }
+        /* L'effet de survol est maintenant géré en JS pour un effet 3D. */
 
         .testimonial-card::before {
             content: '';
@@ -762,6 +849,23 @@
             opacity: 1;
         }
 
+        .testimonial-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle 250px at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.07), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: inherit;
+        }
+        .testimonial-card:hover::after {
+            opacity: 1;
+        }
+
         .testimonial-text {
             font-size: 1.1rem;
             color: var(--text-primary);
@@ -772,6 +876,102 @@
         .testimonial-author {
             font-weight: 700;
             color: var(--text-primary);
+        }
+
+        /* --- MODAL (for testimonials) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 6, 8, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .modal-overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            border: 1px solid transparent;
+            background: radial-gradient(600px circle at 50% -40%, var(--accent), transparent 60%) border-box;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.4;
+        }
+
+        .modal-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: inherit;
+        }
+        .modal-content:hover::after {
+            opacity: 1;
+        }
+
+        .modal-overlay.is-visible .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 44px;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: rotate(90deg);
         }
 
         /* --- ANIMATIONS --- */
@@ -946,8 +1146,10 @@
                 <div class="widget-value">01 > 02 > 03 > 04</div>
             </div>
         </div>
-        <h1 class="hero-element">ACCOMPAGNEMENT HYBRIDE POUR PME AMBITIEUSES</h1>
-        <div class="hero-element"><a href="#parcours" class="cta-btn">DÉCOUVRIR LE PROGRAMME</a></div>
+        <div class="hero-content">
+            <h1 class="hero-element">ACCOMPAGNEMENT HYBRIDE POUR PME AMBITIEUSES</h1>
+            <div class="hero-element"><a href="#parcours" class="cta-btn">DÉCOUVRIR LE PROGRAMME</a></div>
+        </div>
     </section>
     
     <section class="code-editor-section" id="parcours">
@@ -965,7 +1167,7 @@
                     <span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>
                 </div>
                 <div class="editor-body">
-                    <pre id="code-display"></pre>
+                    <div id="code-display"></div>
                 </div>
             </div>
         </div>
@@ -976,6 +1178,18 @@
         <p class="section-subtitle">Nous ne vendons pas une formation. Nous provoquons des résultats.</p>
         <div class="marquee-wrapper">
             <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Je me concentre enfin sur le coaching, pas sur l'algorithme. En 30 jours, j'ai gagné 3 nouveaux clients et une clarté que je n'avais jamais eue."</p>
+                    <p class="testimonial-author">- Claire D., Coach en Nutrition</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"L'alliance de la stratégie humaine et de l'ingénierie IA est juste bluffante. On se sent vraiment accompagné de A à Z."</p>
+                    <p class="testimonial-author">- Julien L., Consultant Freelance</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Le module sur le clonage de style a changé ma vie. Je peux enfin déléguer la rédaction de certains contenus sans perdre mon identité."</p>
+                    <p class="testimonial-author">- Sophie M., Créatrice de contenu</p>
+                </div>
                 <div class="testimonial-card">
                     <p class="testimonial-text">"Je me concentre enfin sur le coaching, pas sur l'algorithme. En 30 jours, j'ai gagné 3 nouveaux clients et une clarté que je n'avais jamais eue."</p>
                     <p class="testimonial-author">- Claire D., Coach en Nutrition</p>
@@ -1072,8 +1286,16 @@
         <p>&copy; <span id="current-year"></span> PROJET MM - Mathias & Matthieu. Tous droits réservés.</p>
     </footer>
 
+    <!-- Testimonial Modal -->
+    <div id="testimonial-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <p id="modal-text" class="testimonial-text" style="margin-bottom: 2rem;"></p>
+            <p id="modal-author" class="testimonial-author"></p>
+        </div>
+    </div>
+
     <!-- 3D and Animation Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.164.1/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
@@ -1118,6 +1340,28 @@
                 delay: 0.5
             });
 
+            if (isNotTouchDevice) {
+                launchBtn.addEventListener('mouseenter', () => {
+                    gsap.to(launchBtn, {
+                        y: -3,
+                        scale: 1.03,
+                        boxShadow: '0 10px 20px rgba(0, 240, 160, 0.2), 0 0 30px rgba(0, 240, 160, 0.4)',
+                        duration: 0.3,
+                        ease: 'power3.out'
+                    });
+                });
+
+                launchBtn.addEventListener('mouseleave', () => {
+                    gsap.to(launchBtn, {
+                        y: 0,
+                        scale: 1,
+                        boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+                        duration: 0.3,
+                        ease: 'power3.out'
+                    });
+                });
+            }
+
             launchBtn.addEventListener('click', () => {
                 gsap.to(preloader, {
                     opacity: 0,
@@ -1132,7 +1376,90 @@
                 });
             });
 
+            function init3DTilt() {
+                if (!isNotTouchDevice) return;
+
+                const tiltElements = document.querySelectorAll('.price-card, .testimonial-card');
+
+                tiltElements.forEach(el => {
+                    el.addEventListener('mousemove', (e) => {
+                        const rect = el.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        const rotateX = (y - centerY) / centerY * -8; // Max rotation 8 degrees
+                        const rotateY = (x - centerX) / centerX * 8; // Max rotation 8 degrees
+
+                        gsap.to(el, {
+                            duration: 0.7,
+                            rotationX: rotateX,
+                            rotationY: rotateY,
+                            scale: 1.03,
+                            ease: 'power3.out',
+                            transformPerspective: 1000,
+                        });
+                    });
+
+                    el.addEventListener('mouseleave', () => {
+                        gsap.to(el, {
+                            duration: 1,
+                            rotationX: 0,
+                            rotationY: 0,
+                            scale: 1,
+                            ease: 'elastic.out(1, 0.5)'
+                        });
+                    });
+                });
+            }
+
+            function initTestimonialModal() {
+                const modal = document.getElementById('testimonial-modal');
+                if (!modal) return;
+
+                const modalText = document.getElementById('modal-text');
+                const modalAuthor = document.getElementById('modal-author');
+                const closeBtn = modal.querySelector('.modal-close');
+                const testimonialCards = document.querySelectorAll('.testimonial-card');
+                const marqueeWrapper = document.querySelector('.marquee-wrapper');
+
+                const openModal = (card) => {
+                    const text = card.querySelector('.testimonial-text').textContent;
+                    const author = card.querySelector('.testimonial-author').textContent;
+
+                    modalText.textContent = text;
+                    modalAuthor.textContent = author;
+
+                    modal.classList.add('is-visible');
+                    document.body.style.overflow = 'hidden';
+                    if (marqueeWrapper) marqueeWrapper.style.animationPlayState = 'paused';
+                };
+
+                const closeModal = () => {
+                    modal.classList.remove('is-visible');
+                    document.body.style.overflow = '';
+                    if (marqueeWrapper) marqueeWrapper.style.animationPlayState = 'running';
+                };
+
+                testimonialCards.forEach(card => {
+                    card.addEventListener('click', () => openModal(card));
+                });
+
+                closeBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && modal.classList.contains('is-visible')) closeModal();
+                });
+            }
+
             function initPageAnimations() {
+                init3DTilt();
+                initTestimonialModal();
+
                 // 1. Entry Animation
                 gsap.from(".hero-element", {
                     duration: 1,
@@ -1160,95 +1487,56 @@
                 });
 
                 // 3. Code Editor Section Logic
-            const codeContent = {
-                diagnostic: `{
-    <span class="token-key">"phase"</span>: <span class="token-string">"Diagnostic"</span>,
-    <span class="token-key">"objectif"</span>: <span class="token-string">"Identifier blocages et opportunités"</span>,
-    <span class="token-key">"livrables"</span>: [
-        <span class="token-string">"Audit 360°"</span>,
-        <span class="token-string">"Fiche de positionnement"</span>
-    ]
-}`,
-                strategie: `{
-    <span class="token-key">"phase"</span>: <span class="token-string">"Stratégie"</span>,
-    <span class="token-key">"action"</span>: <span class="token-string">"Définir la feuille de route"</span>,
-    <span class="token-key">"modules"</span>: [
-        <span class="token-string">"Stratégie de Contenu"</span>,
-        <span class="token-string">"Clonage de Style IA"</span>
-    ]
-}`,
-                deploiement: `<span class="token-prompt">$</span> npm run start --strategy deployment
-<span class="token-comment">// Initialisation des systèmes automatisés...</span>
-<span class="token-comment">// Déploiement des agents IA...</span>
-<span class="token-comment">// Statut : Opérationnel</span>`,
-                pilotage: `{
-    <span class="token-key">"phase"</span>: <span class="token-string">"Pilotage"</span>,
-    <span class="token-key">"focus"</span>: <span class="token-string">"Analyse des KPIs et itération"</span>,
-    <span class="token-key">"reporting_frequency"</span>: <span class="token-number">7</span> <span class="token-comment">// jours</span>
-}`
-            };
-            const codeDisplay = document.getElementById('code-display');
-            const steps = document.querySelectorAll('.code-editor-left li');
-            
-            steps.forEach(step => {
-                ScrollTrigger.create({
-                    trigger: step,
-                    start: 'top center',
-                    end: 'bottom center',
-                    onEnter: () => {
-                        steps.forEach(s => s.classList.remove('is-active'));
-                        step.classList.add('is-active');
-                        codeDisplay.innerHTML = codeContent[step.dataset.target];
-                    },
-                    onEnterBack: () => {
-                        steps.forEach(s => s.classList.remove('is-active'));
-                        step.classList.add('is-active');
-                        codeDisplay.innerHTML = codeContent[step.dataset.target];
-                    }
-                });
-            });
-            // Set initial state
-            if (steps.length > 0) {
-                codeDisplay.innerHTML = codeContent[steps[0].dataset.target];
-                steps[0].classList.add('is-active');
                 const codeContent = {
-                    diagnostic: `{
-        <span class="token-key">"phase"</span>: <span class="token-string">"Diagnostic"</span>,
-        <span class="token-key">"objectif"</span>: <span class="token-string">"Identifier blocages et opportunités"</span>,
-        <span class="token-key">"livrables"</span>: [
-            <span class="token-string">"Audit 360°"</span>,
-            <span class="token-string">"Fiche de positionnement"</span>
-        ]
-    }`,
-                    strategie: `{
-        <span class="token-key">"phase"</span>: <span class="token-string">"Stratégie"</span>,
-        <span class="token-key">"action"</span>: <span class="token-string">"Définir la feuille de route"</span>,
-        <span class="token-key">"modules"</span>: [
-            <span class="token-string">"Stratégie de Contenu"</span>,
-            <span class="token-string">"Clonage de Style IA"</span>
-        ]
-    }`,
-                    deploiement: `<span class="token-prompt">$</span> npm run start --strategy deployment
-    <span class="token-comment">// Initialisation des systèmes automatisés...</span>
-    <span class="token-comment">// Déploiement des agents IA...</span>
-    <span class="token-comment">// Statut : Opérationnel</span>`,
-                    pilotage: `{
-        <span class="token-key">"phase"</span>: <span class="token-string">"Pilotage"</span>,
-        <span class="token-key">"focus"</span>: <span class="token-string">"Analyse des KPIs et itération"</span>,
-        <span class="token-key">"reporting_frequency"</span>: <span class="token-number">7</span> <span class="token-comment">// jours</span>
-    }`
+                    diagnostic: `
+<div class="phase-content">
+    <h3 class="phase-title">Phase 1 : Diagnostic Complet</h3>
+    <p class="phase-description">On plonge au cœur de votre activité pour identifier avec précision vos forces, vos faiblesses et les opportunités de croissance inexploitées.</p>
+    <h4 class="phase-deliverables-title">Livrables Clés</h4>
+    <ul class="phase-deliverables">
+        <li>Audit 360° de votre présence en ligne</li>
+        <li>Fiche de positionnement stratégique</li>
+    </ul>
+</div>`,
+                    strategie: `
+<div class="phase-content">
+    <h3 class="phase-title">Phase 2 : Feuille de Route</h3>
+    <p class="phase-description">Nous co-construisons une stratégie de contenu claire et un plan d'action pour atteindre vos objectifs. C'est ici que l'IA commence à travailler pour vous.</p>
+    <h4 class="phase-deliverables-title">Modules Principaux</h4>
+    <ul class="phase-deliverables">
+        <li>Définition de la Stratégie de Contenu</li>
+        <li>Mise en place du Clonage de Style IA</li>
+    </ul>
+</div>`,
+                    deploiement: `
+<div class="phase-content">
+    <h3 class="phase-title">Phase 3 : Activation</h3>
+    <p class="phase-description">On passe à l'action. Vos systèmes de création de contenu automatisés sont lancés, et vos agents IA commencent à générer des leads qualifiés.</p>
+    <h4 class="phase-deliverables-title">Actions Majeures</h4>
+    <ul class="phase-deliverables">
+        <li>Lancement des agents IA d'acquisition</li>
+        <li>Automatisation des flux de travail</li>
+    </ul>
+</div>`,
+                    pilotage: `
+<div class="phase-content">
+    <h3 class="phase-title">Phase 4 : Pilotage & Optimisation</h3>
+    <p class="phase-description">Nous analysons les performances en temps réel, ajustons la stratégie et optimisons les campagnes pour garantir un retour sur investissement maximal.</p>
+    <h4 class="phase-deliverables-title">Focus</h4>
+    <ul class="phase-deliverables">
+        <li>Analyse des KPIs via Dashboard</li>
+        <li>Itérations et rapports hebdomadaires</li>
+    </ul>
+</div>`
                 };
                 const codeDisplay = document.getElementById('code-display');
                 const steps = document.querySelectorAll('.code-editor-left li');
-                const codeSection = document.querySelector('.code-editor-section');
+                const editorBody = document.querySelector('.editor-body');
 
-                if (codeSection && steps.length > 0) {
-                    ScrollTrigger.create({
-                        trigger: codeSection,
-                        pin: true,
-                        start: "top top",
-                        end: `+=${codeSection.offsetHeight}`,
-                    });
+                if (window.matchMedia("(min-width: 769px)").matches && steps.length > 0 && codeDisplay && editorBody) {
+                    // Set initial state
+                    steps[0].classList.add('is-active');
+                    codeDisplay.innerHTML = codeContent[steps[0].dataset.target];
 
                     steps.forEach(step => {
                         ScrollTrigger.create({
@@ -1257,31 +1545,47 @@
                             end: 'bottom center',
                             onToggle: self => {
                                 if (self.isActive) {
+                                    // Update active step
                                     steps.forEach(s => s.classList.remove('is-active'));
                                     step.classList.add('is-active');
-                                    codeDisplay.innerHTML = codeContent[step.dataset.target];
+
+                                    // Animate code change
+                                    gsap.to(editorBody, {
+                                        opacity: 0,
+                                        duration: 0.2,
+                                        onComplete: () => {
+                                            codeDisplay.innerHTML = codeContent[step.dataset.target];
+                                            gsap.to(editorBody, { opacity: 1, duration: 0.3 });
+                                        }
+                                    });
                                 }
                             }
                         });
-                    });
 
-                    steps[0].classList.add('is-active');
-                    codeDisplay.innerHTML = codeContent[steps[0].dataset.target];
+                        // Add click event to scroll to the section
+                        step.addEventListener('click', () => {
+                            const targetScrollY = window.scrollY + step.getBoundingClientRect().top - window.innerHeight / 2;
+                            window.scrollTo({
+                                top: targetScrollY,
+                                behavior: 'smooth'
+                            });
+                        });
+                    });
                 }
 
-            }
-
-                // 4. Pricing card spotlight effect
-            const priceCard = document.querySelector('.price-card');
-            if (priceCard) {
-                priceCard.addEventListener('mousemove', (e) => {
-                    const rect = priceCard.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    priceCard.style.setProperty('--mouse-x', `${x}px`);
-                    priceCard.style.setProperty('--mouse-y', `${y}px`);
-                });
-            }
+                // 4. Spotlight effect for interactive elements
+                const spotlightElements = document.querySelectorAll('.price-card, .code-editor-left li, .editor-window, .testimonial-card, .modal-content, .faq-item');
+                if (isNotTouchDevice) {
+                    spotlightElements.forEach(el => {
+                        el.addEventListener('mousemove', (e) => {
+                            const rect = el.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            el.style.setProperty('--mouse-x', `${x}px`);
+                            el.style.setProperty('--mouse-y', `${y}px`);
+                        });
+                    });
+                }
 
                 // 5. Clocks
             const clockItems = document.querySelectorAll('.clock-item');
@@ -1297,6 +1601,7 @@
 
                 // 6. Hero Widgets Parallax
             const widgets = document.querySelectorAll('.widget');
+            const heroContent = document.querySelector('.hero-content');
             if (isNotTouchDevice) {
                 document.querySelector('.hero').addEventListener('mousemove', (e) => {
                     const { clientX, clientY } = e;
@@ -1314,6 +1619,15 @@
                             ease: 'power3.out'
                         });
                     });
+
+                    if (heroContent) {
+                        gsap.to(heroContent, {
+                            duration: 1.2,
+                            rotationY: x * 5,
+                            rotationX: y * -5,
+                            ease: 'power3.out'
+                        });
+                    }
                 });
             }
 
